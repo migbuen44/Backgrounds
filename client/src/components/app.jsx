@@ -5,6 +5,7 @@ import Image from './image.jsx';
 const App = () => {
   let [value, setValue] = useState('');
   let [backgrounds, setBackgrounds] = useState([]);
+  let [currentInterval, setCurrentInterval] = useState();
   let i = 0;
 
   let pexelsAuth = {
@@ -55,11 +56,22 @@ const App = () => {
     } else {
       i = 0;
     }
-
-    setTimeout(changeImg.bind(i), 3000);
   }
 
-  useEffect(changeImg, [backgrounds]);
+  useEffect(() => {
+    changeImg();
+    // console.log(slideShowTimer)
+    // window.clearInterval(6);
+    if (currentInterval) {
+      clearInterval(currentInterval)
+    }
+    var slideShowTimer = setInterval(changeImg.bind(i), 3000);
+    setCurrentInterval(
+      slideShowTimer
+    )
+    // clearInterval(slideShowTimer);
+    // console.log(slideShowTimer)
+  }, [backgrounds]);
 
   return <>
     <input placeholder="Search Mood Here..." value={value} onChange={handleSearchChange}/>
