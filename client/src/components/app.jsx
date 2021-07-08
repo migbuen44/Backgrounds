@@ -28,7 +28,7 @@ const App = () => {
   }
 
   let handleClick = () => {
-    axios.get(`https://api.pexels.com/v1/search?query=${value}`, pexelsAuth)
+    axios.get(`https://api.pexels.com/v1/search?query=${value}+wallpaper`, pexelsAuth)
       .then(data => {
         let photos = data.data.photos
         // console.log(photos)
