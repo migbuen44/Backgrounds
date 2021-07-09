@@ -42,7 +42,10 @@ const App = () => {
       })
   }
 
-  useEffect(handleClick, [])
+  useEffect(() => {
+    handleClick();
+    setValue('')
+  }, [])
 
   let style = {height: '70px', width: 'auto'};
 
@@ -84,7 +87,7 @@ const App = () => {
       })}
     </div>
     <div className='search'>
-      <input placeholder="Search Mood Here..." value={value} onChange={handleSearchChange}/>
+      <input placeholder="Search..." value={value} onChange={handleSearchChange}/>
       <button onClick={handleClick}>Search</button>
     </div>
     <Sounds code={code} search={search}/>

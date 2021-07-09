@@ -40,6 +40,7 @@ const Sounds = ({ code, search}) => {
       token={accessToken}
       showSaveIcon
       autoPlay={true}
+      play={true}
       uris={trackUri ? [trackUri] : []}
     />
   </div>
