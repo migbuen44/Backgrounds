@@ -2,3 +2,24 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.player {
+  position: absolute;
+  bottom: 0;
+  width: 99%;;
+}
+
+.imageContainer {
+  float: left;
+  width: 22vh;
+  height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}

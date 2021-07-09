@@ -7,7 +7,7 @@ import Sounds from './sounds.jsx';
 const code = new URLSearchParams(window.location.search).get('code')
 
 const App = () => {
-  let [value, setValue] = useState('');
+  let [value, setValue] = useState('chill');
   let [search, setSearch] = useState('');
   let [backgrounds, setBackgrounds] = useState([]);
   let [currentInterval, setCurrentInterval] = useState();
@@ -42,6 +42,8 @@ const App = () => {
       })
   }
 
+  useEffect(handleClick, [])
+
   let style = {height: '70px', width: 'auto'};
 
   const changeImg = () => {
@@ -75,13 +77,15 @@ const App = () => {
   }
 
   return <>
-    <input placeholder="Search Mood Here..." value={value} onChange={handleSearchChange}/>
-    <button onClick={handleClick}>Search</button>
-    <div style={{width: '800px'}}>
+    <div className='imageContainer'>
       {backgrounds.map((background, idx) => {
         // console.log(background)
         return <Image key={idx} background={background} style={style}/>
       })}
+    </div>
+    <div className='search'>
+      <input placeholder="Search Mood Here..." value={value} onChange={handleSearchChange}/>
+      <button onClick={handleClick}>Search</button>
     </div>
     <Sounds code={code} search={search}/>
   </>

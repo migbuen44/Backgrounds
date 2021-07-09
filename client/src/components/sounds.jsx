@@ -22,7 +22,7 @@ const Sounds = ({ code, search}) => {
     if(search === '') {
       return;
     }
-    spotifyApi.searchPlaylists(search, {limit: 1})
+    spotifyApi.searchPlaylists(search, {limit: 1, offset: 1})
       .then(res => {
         // console.log(res.body)
         let uri = res.body.playlists.items[0].uri;
@@ -35,7 +35,7 @@ const Sounds = ({ code, search}) => {
     return <></>
   }
 
-  return <div>
+  return <div className='player'>
     <SpotifyPlayer
       token={accessToken}
       showSaveIcon
