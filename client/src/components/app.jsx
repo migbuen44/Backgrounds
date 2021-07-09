@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from './image.jsx';
+import Login from './login.jsx';
+import Sounds from './sounds.jsx';
+
+const code = new URLSearchParams(window.location.search).get('code')
 
 const App = () => {
   let [value, setValue] = useState('');
+  let [search, setSearch] = useState('');
   let [backgrounds, setBackgrounds] = useState([]);
   let [currentInterval, setCurrentInterval] = useState();
   let i = 0;
@@ -28,17 +33,13 @@ const App = () => {
   }
 
   let handleClick = () => {
+    setSearch(value);
     axios.get(`https://api.pexels.com/v1/search?query=${value}+wallpaper`, pexelsAuth)
       .then(data => {
         let photos = data.data.photos
         // console.log(photos)
         setBackgrounds(photos);
       })
-
-    // axios.get('https://api.spotify.com/v1/search?q=work&type=playlist&limit=2', spotifyAuth)
-    //   .then(data => {
-    //     console.log(data)
-    //   })
   }
 
   let style = {height: '70px', width: 'auto'};
@@ -48,8 +49,7 @@ const App = () => {
     if (!backgrounds.length) {
       return;
     }
-    // document.slide.src = backgrounds[i].src.landscape;
-    // document.getElementById('app').style.backgroundImage=`url(${backgrounds[i].src.landscape})`
+
     document.body.style.backgroundImage=`url(${backgrounds[i].src.landscape})`;
     if (i < backgrounds.length - 1) {
       i++
@@ -60,8 +60,7 @@ const App = () => {
 
   useEffect(() => {
     changeImg();
-    // console.log(slideShowTimer)
-    // window.clearInterval(6);
+
     if (currentInterval) {
       clearInterval(currentInterval)
     }
@@ -69,21 +68,22 @@ const App = () => {
     setCurrentInterval(
       slideShowTimer
     )
-    // clearInterval(slideShowTimer);
-    // console.log(slideShowTimer)
   }, [backgrounds]);
+
+  if(!code) {
+    return <Login />
+  }
 
   return <>
     <input placeholder="Search Mood Here..." value={value} onChange={handleSearchChange}/>
     <button onClick={handleClick}>Search</button>
-    <h2>Backgrounds</h2>
     <div style={{width: '800px'}}>
       {backgrounds.map((background, idx) => {
         // console.log(background)
         return <Image key={idx} background={background} style={style}/>
       })}
     </div>
-    <h2>Songs</h2>
+    <Sounds code={code} search={search}/>
   </>
 }
 
