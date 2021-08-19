@@ -4,7 +4,6 @@ let Image = ({ background, style }) => {
 
   // let [fullImageIsOpen, setFullImageIsOpen] = useState(false);
   let src = background.src.landscape;
-  // console.log('src: ', src)
 
   return (
     <>

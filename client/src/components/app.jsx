@@ -7,10 +7,12 @@ import Sounds from './sounds.jsx';
 const code = new URLSearchParams(window.location.search).get('code')
 
 const App = () => {
-  let [value, setValue] = useState('chill');
+  // let [value, setValue] = useState('chill');
+  let [value, setValue] = useState('');
   let [search, setSearch] = useState('');
   let [backgrounds, setBackgrounds] = useState([]);
   let [currentInterval, setCurrentInterval] = useState();
+  let [intervalState, setIntervalState] = useState(true);
   let i = 0;
 
   let pexelsAuth = {
@@ -29,7 +31,6 @@ const App = () => {
 
   let handleSearchChange = (e) => {
     setValue(e.target.value);
-    // console.log(value);
   }
 
   let handleClick = () => {
@@ -37,20 +38,13 @@ const App = () => {
     axios.get(`https://api.pexels.com/v1/search?query=${value}+wallpaper`, pexelsAuth)
       .then(data => {
         let photos = data.data.photos
-        // console.log(photos)
         setBackgrounds(photos);
       })
   }
 
-  useEffect(() => {
-    handleClick();
-    setValue('')
-  }, [])
-
   let style = {height: '70px', width: 'auto'};
 
   const changeImg = () => {
-    // console.log('changeImg')
     if (!backgrounds.length) {
       return;
     }
@@ -70,23 +64,37 @@ const App = () => {
       clearInterval(currentInterval)
     }
     var slideShowTimer = setInterval(changeImg.bind(i), 3000);
-    setCurrentInterval(
-      slideShowTimer
-    )
+    setCurrentInterval(slideShowTimer)
   }, [backgrounds]);
 
   if(!code) {
-    return <Login />
+    return <div className='login'>
+      <Login />
+    </div>
+  }
+
+  const pause = () => {
+    console.log(intervalState)
+    // if (intervalState) {
+    //   setIntervalState(false)
+    // } else {
+    //   setIntervalState(true)
+    // }
+    // if (currentInterval && intervalState) {
+    //   clearInterval(currentInterval)
+    // } else {
+    //   var slideShowTimer = setInterval(changeImg.bind(i), 3000);
+    //   setCurrentInterval(slideShowTimer)
+    // }
   }
 
   return <>
     <div className='imageContainer'>
       {backgrounds.map((background, idx) => {
-        // console.log(background)
         return <Image key={idx} background={background} style={style}/>
       })}
     </div>
-    <div className='search'>
+    <div className='search' onDoubleClick={pause}>
       <input placeholder="Search..." value={value} onChange={handleSearchChange}/>
       <button onClick={handleClick}>Search</button>
     </div>

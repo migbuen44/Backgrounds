@@ -24,12 +24,9 @@ const Sounds = ({ code, search}) => {
     }
     spotifyApi.searchPlaylists(search, {limit: 1, offset: 1})
       .then(res => {
-        // console.log(res.body)
         let uri = res.body.playlists.items[0].uri;
-        // console.log(uri)
         setTrackUri(uri);
       })
-    // console.log(search)
   }, [search])
   if(!accessToken) {
     return <></>
