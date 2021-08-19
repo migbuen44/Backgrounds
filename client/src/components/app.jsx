@@ -4,45 +4,54 @@ import Image from './image.jsx';
 import Login from './login.jsx';
 import Sounds from './sounds.jsx';
 
-const code = new URLSearchParams(window.location.search).get('code')
+const code = new URLSearchParams(window.location.search).get('code');
 
 const App = () => {
   // let [value, setValue] = useState('chill');
-  let [value, setValue] = useState('');
-  let [search, setSearch] = useState('');
-  let [backgrounds, setBackgrounds] = useState([]);
-  let [currentInterval, setCurrentInterval] = useState();
-  let [intervalState, setIntervalState] = useState(true);
+  const [value, setValue] = useState('');
+  const [search, setSearch] = useState('');
+  const [backgrounds, setBackgrounds] = useState([]);
+  const [currentInterval, setCurrentInterval] = useState();
+  const [intervalState, setIntervalState] = useState(true);
   let i = 0;
 
-  let pexelsAuth = {
+  const pexelsAuth = {
     headers: {
-      Authorization: '563492ad6f91700001000001833495325f904f5eb9301c9833e95697'
-    }
-  }
+      Authorization: '563492ad6f91700001000001833495325f904f5eb9301c9833e95697',
+    },
+  };
 
-  let spotifyAuth = {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer BQBw7oihJ9Wn1StG1WDcFrM0RskbwlfvaCEXmFhX8GuoLHHs1dc2vsW-HMNH3iO6u--Uj6dtdglQlksU-3F0RjKQawVR0tbbY8wYC4P5QpRnnYZ3VRxM21t76AD5GKZikn1TLjLeEtfurw'
-  }
-  }
+  // const spotifyAuth = {
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer BQBw7oihJ9Wn1StG1WDcFrM0RskbwlfvaCEXmFhX8GuoLHHs1dc2vsW-HMNH3iO6u
+  // --Uj6dtdglQlksU-3F0RjKQawVR0tbbY8wYC4P5QpRnnYZ3VRxM21t76AD5GKZikn1TLjLeEtfurw'
+  //   },
+  // };
 
-  let handleSearchChange = (e) => {
+  const handleSearchChange = (e) => {
     setValue(e.target.value);
-  }
+  };
 
-  let handleClick = () => {
+  const handleClick = () => {
     setSearch(value);
     axios.get(`https://api.pexels.com/v1/search?query=${value}+wallpaper`, pexelsAuth)
-      .then(data => {
-        let photos = data.data.photos
+      .then((data) => {
+        const { photos } = data.data;
         setBackgrounds(photos);
-      })
-  }
+      });
+  };
 
-  let style = {height: '70px', width: 'auto'};
+  // useEffect(() => {
+  //   if(!code) {
+  //     return;
+  //   }
+  //   handleClick();
+  //   setValue('')
+  // }, [])
+
+  const style = { height: '70px', width: 'auto' };
 
   const changeImg = () => {
     if (!backgrounds.length) {
@@ -50,31 +59,34 @@ const App = () => {
     }
 
     document.body.style.backgroundImage=`url(${backgrounds[i].src.landscape})`;
+
     if (i < backgrounds.length - 1) {
-      i++
+      i += 1;
     } else {
       i = 0;
     }
-  }
+  };
 
   useEffect(() => {
     changeImg();
 
     if (currentInterval) {
-      clearInterval(currentInterval)
+      clearInterval(currentInterval);
     }
-    var slideShowTimer = setInterval(changeImg.bind(i), 3000);
-    setCurrentInterval(slideShowTimer)
+    const slideShowTimer = setInterval(changeImg.bind(i), 3000);
+    setCurrentInterval(slideShowTimer);
   }, [backgrounds]);
 
-  if(!code) {
-    return <div className='login'>
-      <Login />
-    </div>
+  if (!code) {
+    return (
+      <div className="login">
+        <Login />
+      </div>
+    );
   }
 
   const pause = () => {
-    console.log(intervalState)
+    console.log(intervalState);
     // if (intervalState) {
     //   setIntervalState(false)
     // } else {
@@ -86,20 +98,21 @@ const App = () => {
     //   var slideShowTimer = setInterval(changeImg.bind(i), 3000);
     //   setCurrentInterval(slideShowTimer)
     // }
-  }
+  };
 
-  return <>
-    <div className='imageContainer'>
-      {backgrounds.map((background, idx) => {
-        return <Image key={idx} background={background} style={style}/>
-      })}
-    </div>
-    <div className='search' onDoubleClick={pause}>
-      <input placeholder="Search..." value={value} onChange={handleSearchChange}/>
-      <button onClick={handleClick}>Search</button>
-    </div>
-    <Sounds code={code} search={search}/>
-  </>
-}
+  return (
+    <>
+      <div className='imageContainer'>
+        {backgrounds.map((background, idx) =>
+          <Image key={idx} background={background} style={style} />)}
+      </div>
+      <div className="search" onDoubleClick={pause}>
+        <input placeholder="Search..." value={value} onChange={handleSearchChange} />
+        <button type="submit" onClick={handleClick}>Search</button>
+      </div>
+      <Sounds code={code} search={search} />
+    </>
+  );
+};
 
 export default App;
