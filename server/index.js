@@ -17,7 +17,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.post('/login', (req, res) => {
   const code = req.body.code;
-  // console.log('code: ', code);
   const spotifyApi = new SpotifyWebApi({
     redirectUri: 'http://localhost:3000',
     clientId: '4cb458aef9d344d2a58c62e7da3d0da5',
@@ -26,7 +25,6 @@ app.post('/login', (req, res) => {
 
   spotifyApi.authorizationCodeGrant(code)
     .then(data => {
-      // console.log('data: ', data)
       res.json({
         accessToken: data.body.access_token,
         refreshToken: data.body.refresh_token,
