@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Image from './image.jsx';
+import Image from './image';
 import Login from './login.jsx';
-import Sounds from './sounds.jsx';
+import Sounds from './sounds';
+import info from '../info';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -15,20 +16,7 @@ const App = () => {
   const [intervalState, setIntervalState] = useState(true);
   let i = 0;
 
-  const pexelsAuth = {
-    headers: {
-      Authorization: '563492ad6f91700001000001833495325f904f5eb9301c9833e95697',
-    },
-  };
-
-  // const spotifyAuth = {
-  //   headers: {
-  //     'Accept': 'application/json',
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer BQBw7oihJ9Wn1StG1WDcFrM0RskbwlfvaCEXmFhX8GuoLHHs1dc2vsW-HMNH3iO6u
-  // --Uj6dtdglQlksU-3F0RjKQawVR0tbbY8wYC4P5QpRnnYZ3VRxM21t76AD5GKZikn1TLjLeEtfurw'
-  //   },
-  // };
+  const { pexelsAuth } = info;
 
   const handleSearchChange = (e) => {
     setValue(e.target.value);
@@ -42,14 +30,6 @@ const App = () => {
         setBackgrounds(photos);
       });
   };
-
-  // useEffect(() => {
-  //   if(!code) {
-  //     return;
-  //   }
-  //   handleClick();
-  //   setValue('')
-  // }, [])
 
   const style = { height: '70px', width: 'auto' };
 
