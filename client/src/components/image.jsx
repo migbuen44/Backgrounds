@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, {useState, useEffect} from 'react';
 
-let Image = ({ background, style }) => {
-
+const Image = ({ background, style }) => {
   // let [fullImageIsOpen, setFullImageIsOpen] = useState(false);
-  let src = background.src.landscape;
+  const src = background.src.landscape;
 
   return (
     <>
-      <img style={style} src={src}></img>&nbsp;
+      <img style={style} src={src} alt="" />
+      &nbsp;
     </>
   );
 };
