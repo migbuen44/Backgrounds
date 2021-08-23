@@ -15,7 +15,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.post('/login', (req, res) => {
+app.get('/', (req, res) => {
+  res.render();
+});
+
+app.post('/spotifyLogin', (req, res) => {
   const { code } = req.body;
   const spotifyApi = new SpotifyWebApi({
     redirectUri: 'http://localhost:3000',

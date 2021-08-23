@@ -24,7 +24,7 @@ body {
   min-height: 90vh;
 }
 
-.login {
+.spotifylogin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,7 @@ body {
   /*  */
 }
 
-.loginButton {
+.spotifyLoginButton {
   display: block;
     width: 115px;
     height: 25px;

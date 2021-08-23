@@ -7,7 +7,7 @@ const useAuth = (code) => {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    axios.post('http://localhost:3000/login', {
+    axios.post('http://localhost:3000/spotifyLogin', {
       code,
     })
       .then((res) => {

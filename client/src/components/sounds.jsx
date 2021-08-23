@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import useAuth from '../useAuth.js';
+import info from '../info';
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: '4cb458aef9d344d2a58c62e7da3d0da5',
+  clientId: info.spotifyClientId,
 });
 
 const Sounds = ({ code, search }) => {
