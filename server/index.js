@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
   res.render();
 });
 
+app.post('/login', (req, res) => {
+  console.log(req.body);
+});
+
 app.post('/spotifyLogin', (req, res) => {
   const { code } = req.body;
   const spotifyApi = new SpotifyWebApi({
