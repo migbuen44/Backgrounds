@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import Home from './home';
 import SpotifyLogin from './spotifyLogin';
+import Login from './login';
+import SignUp from './signup';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -17,6 +19,8 @@ const App = () => (
         {!code ? <Redirect to="/spotifyLogin" /> : <Home />}
       </Route>
       <Route path="/spotifyLogin" component={SpotifyLogin} />
+      <Route path="/login" component={Login} />
+      <SignUp path="/signup" component={SignUp} />
     </Switch>
   </Router>
 );

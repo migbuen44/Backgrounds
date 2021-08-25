@@ -87,6 +87,9 @@ const Home = () => {
         <input placeholder="Search..." value={value} onChange={handleSearchChange} />
         <button type="submit" onClick={handleClick}>Search</button>
       </div>
+      <button type="button" className="loginButton">
+        <Link to="/login">Login</Link>
+      </button>
       <Sounds code={code} search={search} />
     </>
   );
