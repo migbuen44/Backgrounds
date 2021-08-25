@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
   res.render();
 });
 
+app.post('/signup', (req, res) => {
+  console.log('signup body: ', req.body);
+});
+
 app.post('/login', (req, res) => {
   const user = {
     id: 1,

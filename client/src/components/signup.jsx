@@ -8,12 +8,13 @@ import save from '../save';
 const { url } = info;
 const { localStorage } = window;
 
-const Login = () => {
+const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleLoginClick = () => {
-    axios.post(`${url}/login`, { username, password })
+  const handleSignUpClick = () => {
+    axios.post(`${url}/signup`, { username, password, email })
       .then((response) => {
         console.log(response);
         const jwt = response.data;
@@ -36,10 +37,18 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <>
-      <div>LoginPage</div>
+      <div>SignUp Page</div>
       <form>
+        <div>
+          <label>Email: </label>
+          <input type="email" className="email" onChange={handleEmailChange} />
+        </div>
         <div>
           <label>Username: </label>
           <input type="text" className="username" onChange={handleUsernameChange} />
@@ -48,13 +57,13 @@ const Login = () => {
           <label>Password: </label>
           <input type="password" className="password" onChange={handlePasswordChange} />
         </div>
-        <button type="button" className="submitLogin" onClick={handleLoginClick}>Login</button>
-        <button type="button" className="toSignUp">
-          <Link to="/signup">SignUp</Link>
+        <button type="button" className="signUp" onClick={handleSignUpClick}>SignUp</button>
+        <button type="button" className="toLogin">
+          <Link to="/login">Login</Link>
         </button>
       </form>
     </>
   );
 };
 
-export default Login;
+export default SignUp;
