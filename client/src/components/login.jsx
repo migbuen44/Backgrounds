@@ -3,6 +3,7 @@ import axios from 'axios';
 import info from '../info';
 
 const { url } = info;
+const { localStorage } = window;
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,6 +13,10 @@ const Login = () => {
     axios.post(`${url}/login`, { username, password })
       .then((response) => {
         console.log(response);
+        const jwt = response.data;
+        localStorage.setItem('jwt', jwt);
+        const localStorageTest = localStorage.getItem('jwt');
+        console.log('localStorageTest: ', localStorageTest);
       })
       .catch((err) => {
         console.log(err);

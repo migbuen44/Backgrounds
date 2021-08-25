@@ -4,6 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const SpotifyWebApi = require('spotify-web-api-node');
+const config = require('./config');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -21,15 +23,18 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   console.log(req.body);
+  const user = {
+    id: 1,
+    name: 'miguel',
+  };
+  jwt.sign({ user }, 'secret', (err, token) => {
+    res.send(token);
+  });
 });
 
 app.post('/spotifyLogin', (req, res) => {
   const { code } = req.body;
-  const spotifyApi = new SpotifyWebApi({
-    redirectUri: 'http://localhost:3000',
-    clientId: '4cb458aef9d344d2a58c62e7da3d0da5',
-    clientSecret: '2e6bd64570aa417380bf094641e67458',
-  });
+  const spotifyApi = new SpotifyWebApi(config.spotifyWebAPIconfig);
 
   spotifyApi.authorizationCodeGrant(code)
     .then((data) => {
