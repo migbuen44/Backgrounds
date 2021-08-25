@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const SpotifyWebApi = require('spotify-web-api-node');
 const config = require('./config');
 const jwt = require('jsonwebtoken');
+const secret = require('./secret');
 
 const app = express();
 
@@ -22,13 +23,24 @@ app.get('/', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  console.log(req.body);
   const user = {
     id: 1,
     name: 'miguel',
   };
-  jwt.sign({ user }, 'secret', (err, token) => {
+  jwt.sign({ user }, secret, (err, token) => {
     res.send(token);
+  });
+});
+
+app.post('/save', (req, res) => {
+  const token = req.body.token;
+
+  jwt.verify(token, secret, (err) => {
+    if (err) {
+      res.sendStatus(401);
+    }
+
+    console.log('authorized user');
   });
 });
 

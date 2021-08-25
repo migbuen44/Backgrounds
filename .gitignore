@@ -105,3 +105,5 @@ typings/
 info.js
 
 config.js
+
+secret.js

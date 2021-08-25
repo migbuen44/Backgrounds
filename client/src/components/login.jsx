@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import info from '../info';
+import save from '../save';
 
 const { url } = info;
 const { localStorage } = window;
@@ -17,6 +18,8 @@ const Login = () => {
         localStorage.setItem('jwt', jwt);
         const localStorageTest = localStorage.getItem('jwt');
         console.log('localStorageTest: ', localStorageTest);
+
+        save(`${localStorageTest}fail`);
       })
       .catch((err) => {
         console.log(err);
