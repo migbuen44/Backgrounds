@@ -4,8 +4,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const SpotifyWebApi = require('spotify-web-api-node');
-const config = require('./config');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('./config');
 const secret = require('./secret');
 
 const app = express();
@@ -24,6 +25,11 @@ app.get('/', (req, res) => {
 
 app.post('/signup', (req, res) => {
   console.log('signup body: ', req.body);
+  const { username, password, email } = req.body;
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    console.log('hashed password: ', hash);
+  });
 });
 
 app.post('/login', (req, res) => {
