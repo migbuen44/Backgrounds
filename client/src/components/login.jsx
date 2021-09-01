@@ -4,32 +4,31 @@ import { Link } from 'react-router-dom';
 import info from '../info';
 import save from '../save';
 
-
 const { url } = info;
 const { localStorage } = window;
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLoginClick = () => {
-    axios.post(`${url}/login`, { username, password })
+    axios.post(`${url}/login`, { email, password })
       .then((response) => {
         console.log(response);
-        const jwt = response.data;
+        const jwt = response.data.token;
         localStorage.setItem('jwt', jwt);
         const localStorageTest = localStorage.getItem('jwt');
         console.log('localStorageTest: ', localStorageTest);
 
-        save(`${localStorageTest}fail`);
+        save(`${localStorageTest}`);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -41,8 +40,8 @@ const Login = () => {
       <div>LoginPage</div>
       <form>
         <div>
-          <label>Username: </label>
-          <input type="text" className="username" onChange={handleUsernameChange} />
+          <label>Email: </label>
+          <input type="email" className="email" onChange={handleEmailChange} />
         </div>
         <div>
           <label>Password: </label>

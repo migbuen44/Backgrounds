@@ -11,9 +11,7 @@ router.post('/signup', (req, res) => {
 
   bcrypt.hash(password, 10, (error, hash) => {
     // console.log('hashed password: ', hash);
-    if (error) {
-      res.send(error);
-    }
+    if (error) return res.sendStatus(500);
 
     const userInfo = {
       name,
@@ -21,37 +19,53 @@ router.post('/signup', (req, res) => {
       password: hash,
     };
 
-    db.addUser(userInfo, (err, result) => {
-      if (err) {
-        res.send('error');
-      } else {
-        res.send(result);
-      }
+    db.addUser(userInfo, (err) => {
+      if (err) return res.sendStatus(400);
+
+      const user = { name, email };
+
+      jwt.sign(user, secret, (jwtErr, token) => {
+        if (jwtErr) return res.sendStatus(500);
+
+        res.send({ user, token });
+      });
     });
   });
 });
 
 router.post('/login', (req, res) => {
-  const user = {
-    id: 1,
-    name: 'miguel',
-  };
-  const { name , password } = req.body;
+  const { email, password } = req.body;
 
-  jwt.sign({ user }, secret, (err, token) => {
-    res.send(token);
+  db.getUser(email, (dbErr, dbResult) => {
+    if (dbErr) return res.sendStatus(404);
+
+    const userInfo = dbResult.rows[0];
+    const hashedPassword = userInfo.password;
+
+    bcrypt.compare(password, hashedPassword)
+      .then((passwordResult) => {
+        if (!passwordResult) return res.sendStatus(401);
+
+        const { name, email } = userInfo;
+        const user = { name, email };
+
+        jwt.sign(user, secret, (jwtErr, token) => {
+          if (jwtErr) return res.sendStatus(500);
+
+          res.send({ user, token });
+        });
+      });
   });
 });
 
 router.post('/save', (req, res) => {
   const token = req.body.token;
 
-  jwt.verify(token, secret, (err) => {
-    if (err) {
-      res.sendStatus(401);
-    }
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
 
     console.log('authorized user');
+    console.log('user: ', user);
   });
 });
 

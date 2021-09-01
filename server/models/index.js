@@ -11,7 +11,20 @@ const db = {
         console.log(err);
         callback(err);
       } else {
-        callback(null, 'User Added');
+        callback(null);
+      }
+    });
+  },
+  getUser: (email, callback) => {
+    console.log('email: ', email);
+    const queryString = `SELECT * FROM users WHERE email = '${email}'`;
+
+    pool.query(queryString, (err, result) => {
+      if (err) {
+        console.log(err);
+        callback(err);
+      } else {
+        callback(null, result);
       }
     });
   },
