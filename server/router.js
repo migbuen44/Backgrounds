@@ -66,6 +66,7 @@ router.post('/save', (req, res) => {
 
     console.log('authorized user');
     console.log('user: ', user);
+    res.sendStatus(200);
   });
 });
 
