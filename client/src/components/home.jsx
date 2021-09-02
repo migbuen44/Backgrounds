@@ -3,18 +3,22 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { openModal } from '../slices/loginModalSlice';
 import Image from './image';
 import SpotifyLogin from './spotifyLogin';
 import Sounds from './sounds';
 import info from '../info';
+import LoginModal from './loginModal';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
   // let [value, setValue] = useState('chill');
+  const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
+  const modalIsOpen = useSelector((state) => state.loginModal.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
   const [value, setValue] = useState('');
   const [search, setSearch] = useState('');
@@ -43,6 +47,12 @@ const Home = () => {
         const { photos } = data.data;
         setBackgrounds(photos);
       });
+  };
+
+  const handleLoginClick = () => {
+    console.log('handle login clicked');
+    dispatch(openModal());
+    console.log('modalIsOpen: ', modalIsOpen);
   };
 
   const style = { height: '70px', width: 'auto' };
@@ -96,10 +106,11 @@ const Home = () => {
         <button type="submit" onClick={handleClick}>Search</button>
       </div>
       {loggedIn ? <></> : (
-        <button type="button" className="loginButton">
-          <Link to="/login">Login</Link>
+        <button type="button" className="loginButton" onClick={handleLoginClick}>
+          Login
         </button>
       )}
+      <LoginModal />
       <Sounds code={code} search={search} />
     </>
   );
