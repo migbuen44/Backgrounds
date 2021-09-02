@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import save from '../save';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../slices/userLoginSlice';
 import info from '../info';
-import save from '../save';
 
 const { url } = info;
 const { localStorage } = window;
 
 const Login = () => {
+  const userLoggedIn = useSelector((state) => state.userLogin.value);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,8 +23,8 @@ const Login = () => {
         localStorage.setItem('jwt', jwt);
         const localStorageTest = localStorage.getItem('jwt');
         console.log('localStorageTest: ', localStorageTest);
-
-        save(`${localStorageTest}`);
+        dispatch(userLogin());
+        console.log('userLoggedIn: ', userLoggedIn);
       })
       .catch((err) => {
         console.log(err);
