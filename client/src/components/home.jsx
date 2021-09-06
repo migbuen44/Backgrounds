@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faSearch, faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { openModal } from '../slices/loginModalSlice';
 import Image from './image';
 import SpotifyLogin from './spotifyLogin';
@@ -39,7 +41,9 @@ const Home = () => {
     setValue(e.target.value);
   };
 
-  const handleClick = () => {
+  const handleSearchSubmit = (e) => {
+    console.log(e);
+    e.preventDefault();
     setSearch(value);
     console.log('pexelsAuth: ', pexelsAuth);
     axios.get(`https://api.pexels.com/v1/search?query=${value}+wallpaper`, pexelsAuth)
@@ -55,7 +59,14 @@ const Home = () => {
     console.log('modalIsOpen: ', modalIsOpen);
   };
 
-  const style = { height: '70px', width: 'auto' };
+  const style = {
+    position: 'relative',
+    right: '0.5vw',
+    height: '70px',
+    display: 'block',
+    marginBottom: '-7px',
+    alignSelf: 'center',
+  };
 
   const changeImg = () => {
     if (!backgrounds.length) {
@@ -102,14 +113,22 @@ const Home = () => {
           <Image key={idx} background={background} style={style} />)}
       </div>
       <div className="search" onDoubleClick={pause}>
-        <input placeholder="Search..." value={value} onChange={handleSearchChange} />
-        <button type="submit" onClick={handleClick}>Search</button>
+        <form className="searchContainer" onSubmit={handleSearchSubmit}>
+          <input placeholder="Search..." className="searchBar" value={value} onChange={handleSearchChange} />
+          <FontAwesomeIcon className="searchIcon" icon={faSearch} />
+        </form>
       </div>
-      {loggedIn ? <></> : (
-        <button type="button" className="loginButton" onClick={handleLoginClick}>
-          Login
-        </button>
-      )}
+      {loggedIn
+        ? (
+          <div className="iconCircle" onClick={handleLoginClick}>
+            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
+          </div>
+        )
+        : (
+        <div className="iconCircle" onClick={handleLoginClick}>
+          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
+        </div>
+        )}
       <LoginModal />
       <Sounds code={code} search={search} />
     </>
