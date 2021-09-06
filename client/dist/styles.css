@@ -11,13 +11,16 @@ body {
 
 .imageContainer {
   position: absolute;
+  top: 0;
   left: 0;
   width: 180px;
   height: 90vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-content: center;
+  margin-top: 10px;
 }
 
 .search {
@@ -28,10 +31,28 @@ body {
   font-size: large;
 }
 
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background:rgba(255, 255, 255, .6)
+  /* opacity: 0.6; */
+}
+
 .searchBar {
-  opacity: 0.6;
   width: 20vh;
   height: 3vh;
+  border: 0;
+  background: transparent;
+}
+
+.searchBar:focus {
+  outline: none;
+}
+
+.searchIcon {
+  margin: 5px;
 }
 
 .spotifylogin {
@@ -57,7 +78,23 @@ body {
 }
 
 .loginButton, .userButton {
+  position: relative;
+  align-self: center;
+  font-size: 17px;
+}
+
+.iconCircle {
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
+  background-color: rgba(184, 184, 184, .8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  /* opacity: 0.3; */
+  z-index: 500;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
 }

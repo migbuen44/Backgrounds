@@ -6,7 +6,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSearch, faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { openModal } from '../slices/loginModalSlice';
 import Image from './image';
 import SpotifyLogin from './spotifyLogin';
@@ -113,16 +113,22 @@ const Home = () => {
           <Image key={idx} background={background} style={style} />)}
       </div>
       <div className="search" onDoubleClick={pause}>
-        <form onSubmit={handleSearchSubmit}>
+        <form className="searchContainer" onSubmit={handleSearchSubmit}>
           <input placeholder="Search..." className="searchBar" value={value} onChange={handleSearchChange} />
+          <FontAwesomeIcon className="searchIcon" icon={faSearch} />
         </form>
       </div>
-      {loggedIn ? <FontAwesomeIcon className="userButton" style={{ color: 'white' }} icon={faUser} /> : (
-        // <button type="button" className="loginButton" onClick={handleLoginClick}>
-        //   Login
-        // </button>
-        <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} onClick={handleLoginClick} />
-      )}
+      {loggedIn
+        ? (
+          <div className="iconCircle" onClick={handleLoginClick}>
+            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
+          </div>
+        )
+        : (
+        <div className="iconCircle" onClick={handleLoginClick}>
+          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
+        </div>
+        )}
       <LoginModal />
       <Sounds code={code} search={search} />
     </>
