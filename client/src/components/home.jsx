@@ -10,9 +10,10 @@ import { faUser, faSearch, faUserSlash } from '@fortawesome/free-solid-svg-icons
 import { openModal } from '../slices/loginModalSlice';
 import Image from './image';
 import SpotifyLogin from './spotifyLogin';
-import Sounds from './sounds';
+import MusicPlayer from './musicPlayer';
 import info from '../info';
 import LoginModal from './loginModal';
+import PlaylistContainer from './playlistContainer';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -112,6 +113,7 @@ const Home = () => {
         {backgrounds.map((background, idx) =>
           <Image key={idx} background={background} style={style} />)}
       </div>
+      <PlaylistContainer />
       <div className="search" onDoubleClick={pause}>
         <form className="searchContainer" onSubmit={handleSearchSubmit}>
           <input placeholder="Search..." className="searchBar" value={value} onChange={handleSearchChange} />
@@ -130,7 +132,7 @@ const Home = () => {
         </div>
         )}
       <LoginModal />
-      <Sounds code={code} search={search} />
+      <MusicPlayer code={code} search={search} />
     </>
   );
 };

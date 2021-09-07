@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-node';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import useAuth from '../useAuth.js';
 import info from '../info';
+import { updatePlaylist } from '../slices/playlistSlice';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: info.spotifyClientId,
 });
 
-const Sounds = ({ code, search }) => {
+const MusicPlayer = ({ code, search }) => {
+  const dispatch = useDispatch();
   const accessToken = useAuth(code);
   const [trackUri, setTrackUri] = useState();
 
@@ -26,8 +29,21 @@ const Sounds = ({ code, search }) => {
     }
     spotifyApi.searchPlaylists(search, { limit: 1, offset: 1 })
       .then((res) => {
+        console.log('res.body: ', res.body);
         const { uri } = res.body.playlists.items[0];
+        console.log('uri: ', uri);
         setTrackUri(uri);
+
+        const uriCode = uri.slice(17);
+        console.log('uriCode: ', uriCode);
+
+        spotifyApi.getPlaylist(uriCode)
+          .then((res) => {
+            console.log('getPlaylist res.body: ', res.body);
+            const playlist = res.body.tracks.items;
+            console.log('playlist: ', playlist);
+            dispatch(updatePlaylist(playlist));
+          });
       });
     // console.log(search)
   }, [search]);
@@ -48,4 +64,4 @@ const Sounds = ({ code, search }) => {
   );
 };
 
-export default Sounds;
+export default MusicPlayer;
