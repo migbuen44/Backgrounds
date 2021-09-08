@@ -14,6 +14,8 @@ const style = {
 };
 
 const ImageContainer = ({ search }) => {
+  console.log('imagecontainer');
+  console.log('search: ', search);
   const [backgrounds, setBackgrounds] = useState([]);
   const [currentInterval, setCurrentInterval] = useState();
 

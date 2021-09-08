@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSearch, faUserSlash } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { openModal } from '../slices/loginModalSlice';
 import MusicPlayer from './musicPlayer';
 import LoginModal from './loginModal';
-import PlaylistContainer from './playlistContainer';
+import SongContainer from './songContainer';
 import ImageContainer from './imageContainer';
+import Search from './search';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -15,7 +16,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
-  const [currentSearchValue, setCurrentSearchValue] = useState('');
+  // const [currentSearchValue, setCurrentSearchValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [intervalState, setIntervalState] = useState(true);
 
@@ -23,14 +24,14 @@ const Home = () => {
     setLoggedIn(userLoggedIn);
   }, [userLoggedIn]);
 
-  const handleSearchChange = (e) => {
-    setCurrentSearchValue(e.target.value);
-  };
+  // const handleSearchChange = (e) => {
+  //   setCurrentSearchValue(e.target.value);
+  // };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    setSearchTerm(currentSearchValue);
-  };
+  // const handleSearchSubmit = (e) => {
+  //   e.preventDefault();
+  //   setSearchTerm(currentSearchValue);
+  // };
 
   const handleLoginClick = () => {
     dispatch(openModal());
@@ -53,13 +54,8 @@ const Home = () => {
   return (
     <>
       <ImageContainer search={searchTerm} />
-      <PlaylistContainer />
-      <div className="search" onDoubleClick={pause}>
-        <form className="searchContainer" onSubmit={handleSearchSubmit}>
-          <input placeholder="Search..." className="searchBar" value={currentSearchValue} onChange={handleSearchChange} />
-          <FontAwesomeIcon className="searchIcon" icon={faSearch} />
-        </form>
-      </div>
+      <SongContainer />
+      <Search setSearchTerm={setSearchTerm} />
       {loggedIn
         ? (
           <div className="iconCircle" onClick={handleLoginClick}>

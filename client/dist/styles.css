@@ -18,7 +18,19 @@ body {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  align-content: center;
+  margin-top: 10px;
+}
+
+.songContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 90vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
   align-content: center;
   margin-top: 10px;
 }
@@ -87,7 +99,7 @@ body {
   display: flex;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 180px;
   background-color: rgba(184, 184, 184, .8);
   border-radius: 50%;
   width: 40px;

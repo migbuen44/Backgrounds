@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-node';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import useAuth from '../useAuth.js';
+import useAuth from '../useAuth';
 import info from '../info';
 import { updatePlaylist } from '../slices/playlistSlice';
 
@@ -16,7 +16,7 @@ const MusicPlayer = ({ code, search }) => {
   const accessToken = useAuth(code);
   const [trackUri, setTrackUri] = useState();
 
-  useEffect(() => {
+  useEffect(() => { // check if this use effect is even needed
     if (!accessToken) {
       return;
     }
@@ -27,7 +27,7 @@ const MusicPlayer = ({ code, search }) => {
     if (search === '') {
       return;
     }
-    spotifyApi.searchPlaylists(search, { limit: 1, offset: 1 })
+    spotifyApi.searchPlaylists(search, { limit: 1, offset: 1 }) // use async await here
       .then((res) => {
         console.log('res.body: ', res.body);
         const { uri } = res.body.playlists.items[0];

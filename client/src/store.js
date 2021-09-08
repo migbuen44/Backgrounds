@@ -3,6 +3,7 @@ import userLoginReducer from './slices/userLoginSlice';
 import loginModalReducer from './slices/loginModalSlice';
 import userInfoReducer from './slices/userInfoSlice';
 import playlistReducer from './slices/playlistSlice';
+import currentSongReducer from './slices/currentSongSlice';
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     loginModal: loginModalReducer,
     userInfo: userInfoReducer,
     playlist: playlistReducer,
+    currentSong: currentSongReducer,
   },
 });

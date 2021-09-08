@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const PlaylistContainer = () => {
+const SongContainer = () => {
   console.log('playlistContainer');
   const playlist = useSelector((state) => state.playlist.value);
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
@@ -11,10 +11,10 @@ const PlaylistContainer = () => {
   }, [playlist]);
 
   return (
-    <div>
+    <div className="songContainer">
       playlistContainer
     </div>
   );
 };
 
-export default PlaylistContainer;
+export default SongContainer;
