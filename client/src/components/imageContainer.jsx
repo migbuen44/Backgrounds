@@ -25,7 +25,7 @@ const ImageContainer = ({ search }) => {
   useEffect(() => {
     if (search === '' || search === undefined) return;
 
-    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper`, pexelsAuth)
+    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
       .then((data) => {
         const { photos } = data.data;
         setBackgrounds(photos);

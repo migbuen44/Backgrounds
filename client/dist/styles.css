@@ -110,3 +110,24 @@ body {
   align-items: center;
   margin: 10px;
 }
+
+.songTile {
+  height: 70px;
+  margin-bottom: 7px;
+  color: white;
+}
+
+.albumImage {
+  position: relative;
+  right: 0.5vw;
+  float: right;
+  height: 60px;
+  display: block;
+  margin-right: 7px;
+  align-self: center;
+};
+
+.songName {
+  font-size: 14px;
+  margin-right: 3px;
+}

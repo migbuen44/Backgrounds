@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-node';
 import info from '../info';
 import { updateCurrentSong } from '../slices/currentSongSlice';
+import SongTile from './songTile';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: info.spotifyClientId,
@@ -30,7 +31,7 @@ const SongContainer = ({ accessToken, search }) => {
         console.log('res.body: ', res.body);
         const { uri } = res.body.playlists.items[0];
         console.log('uri: ', uri);
-        dispatch(updateCurrentSong(uri));
+        // dispatch(updateCurrentSong(uri));
 
         const uriCode = uri.slice(17);
         console.log('uriCode: ', uriCode);
@@ -39,6 +40,8 @@ const SongContainer = ({ accessToken, search }) => {
           .then((res) => {
             console.log('getPlaylist res.body: ', res.body);
             const playlist = res.body.tracks.items;
+            const firstSong = playlist[0].track.uri;
+            dispatch(updateCurrentSong(firstSong));
             console.log('playlist: ', playlist);
             setCurrentPlaylist(playlist);
           });
@@ -47,7 +50,8 @@ const SongContainer = ({ accessToken, search }) => {
 
   return (
     <div className="songContainer">
-      playlistContainer
+      {currentPlaylist.map((song, idx) =>
+        <SongTile song={song} playlistIdx={idx} key={idx} />)}
     </div>
   );
 };

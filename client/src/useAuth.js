@@ -12,6 +12,7 @@ const useAuth = (code) => {
       code,
     })
       .then((res) => {
+        console.log('access Token: ', res.data.accessToken);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
