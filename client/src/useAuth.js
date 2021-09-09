@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useAuth = (code) => {
+  console.log('useAuth called');
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
@@ -11,6 +12,7 @@ const useAuth = (code) => {
       code,
     })
       .then((res) => {
+        console.log('access Token: ', res.data.accessToken);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
