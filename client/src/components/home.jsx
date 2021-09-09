@@ -8,11 +8,13 @@ import LoginModal from './loginModal';
 import SongContainer from './songContainer';
 import ImageContainer from './imageContainer';
 import Search from './search';
+import useAuth from '../useAuth';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
   // let [value, setValue] = useState('chill');
+  const accessToken = useAuth(code);
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
@@ -54,7 +56,7 @@ const Home = () => {
   return (
     <>
       <ImageContainer search={searchTerm} />
-      <SongContainer />
+      <SongContainer search={searchTerm} accessToken={accessToken} />
       <Search setSearchTerm={setSearchTerm} />
       {loggedIn
         ? (
@@ -68,7 +70,7 @@ const Home = () => {
         </div>
         )}
       <LoginModal />
-      <MusicPlayer code={code} search={searchTerm} />
+      <MusicPlayer accessToken={accessToken} />
     </>
   );
 };
