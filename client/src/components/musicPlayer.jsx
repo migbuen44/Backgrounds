@@ -18,8 +18,10 @@ const MusicPlayer = ({ accessToken }) => {
   // }, [currentSongIdx]);
 
   // const handleClick = () => {
-  //   setSongIdx(5);
-  //   setTrackUri(currentSong);
+  //   setSongIdx((prevState) => prevState + 1);
+    // const temp = currentSong;
+    // setTrackUri();
+    // setTrackUri(currentSong);
   // };
 
   if (!accessToken) {
@@ -30,12 +32,10 @@ const MusicPlayer = ({ accessToken }) => {
     <div className='player'>
       <SpotifyPlayer
         token={accessToken}
-        callback={(state) => { console.log(state); }}
         showSaveIcon
         autoPlay={true}
         play={true}
         uris={trackUri ? [trackUri] : []}
-        offset={0}
       />
     </div>
   );
