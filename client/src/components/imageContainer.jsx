@@ -9,7 +9,7 @@ const style = {
   right: '0.5vw',
   height: '70px',
   display: 'block',
-  marginBottom: '-7px',
+  marginBottom: '8px',
   alignSelf: 'center',
 };
 
@@ -19,29 +19,24 @@ const ImageContainer = ({ search }) => {
   const [backgrounds, setBackgrounds] = useState([]);
   const [currentInterval, setCurrentInterval] = useState();
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
+  const [imageClickedIdx, setImageClickedIdx] = useState(0);
   const [imagePaused, setImagePaused] = useState(false);
 
   let imageIdx = 0;
   console.log('currentImageIdx: ', currentImageIdx);
   const { pexelsAuth } = info;
 
-  useEffect(() => {
-    if (search === '' || search === undefined) return;
+  const changeImg = (idx) => {
+    document.body.style.backgroundImage = `url(${backgrounds[idx].src.landscape})`;
+  };
 
-    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
-      .then((data) => {
-        const { photos } = data.data;
-        setBackgrounds(photos);
-      });
-  }, [search]);
-
-  const changeImg = () => {
+  const cycleImg = () => {
     console.log('imageIdx: ', imageIdx);
     if (!backgrounds.length) {
       return;
     }
 
-    document.body.style.backgroundImage = `url(${backgrounds[imageIdx].src.landscape})`;
+    changeImg(imageIdx);
 
     if (imageIdx < backgrounds.length - 1) {
       imageIdx += 1;
@@ -53,11 +48,12 @@ const ImageContainer = ({ search }) => {
   };
 
   const playImages = () => {
+    console.log('playImages()');
     if (currentInterval) {
       clearInterval(currentInterval);
     }
     const slideShowTimer = setInterval(
-      changeImg.bind(imageIdx, currentImageIdx, setCurrentImageIdx), 3000,
+      cycleImg.bind(imageIdx, currentImageIdx, setCurrentImageIdx), 3000,
     );
     setCurrentInterval(slideShowTimer);
   };
@@ -67,13 +63,6 @@ const ImageContainer = ({ search }) => {
       clearInterval(currentInterval);
     }
   };
-
-  useEffect(() => {
-    setCurrentImageIdx(0);
-    changeImg();
-
-    playImages();
-  }, [backgrounds]);
 
   const toggle = () => {
     if (imagePaused) {
@@ -86,12 +75,39 @@ const ImageContainer = ({ search }) => {
     }
   };
 
+  useEffect(() => {
+    if (search === '' || search === undefined) return;
+
+    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
+      .then((data) => {
+        const { photos } = data.data;
+        setBackgrounds(photos);
+      });
+  }, [search]);
+
+  useEffect(() => {
+    setCurrentImageIdx(0);
+    cycleImg();
+    playImages();
+  }, [backgrounds]);
+
+  useEffect(() => {
+    if (!search) return;
+
+    setCurrentImageIdx(imageClickedIdx);
+    console.log('imageIdx before ChangeImg(): ', imageIdx);
+    console.log('imageClickedIdx: ', imageClickedIdx);
+    changeImg(imageClickedIdx);
+    pauseImages();
+    setImagePaused(true);
+  }, [imageClickedIdx]);
+
   return (
     <>
       <div onClick={toggle} style={{position: 'absolute', left: '30vw'}}>Toggle</div>
       <div className="imageContainer">
         {backgrounds.map((background, idx) =>
-          <Image key={idx} background={background} style={style} />)}
+          <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}
       </div>
     </>
   );
