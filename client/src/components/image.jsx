@@ -1,13 +1,22 @@
+/* eslint-disable react/prop-types */
 import React, {useState, useEffect} from 'react';
 
-let Image = ({ background, style }) => {
-
+const Image = ({
+  background,
+  style,
+  setImageClickedIdx,
+  idx,
+}) => {
   // let [fullImageIsOpen, setFullImageIsOpen] = useState(false);
-  let src = background.src.landscape;
+  const src = background.src.landscape;
+
+  const handleImageClick = () => {
+    setImageClickedIdx(idx);
+  };
 
   return (
     <>
-      <img style={style} src={src}></img>&nbsp;
+      <img style={style} src={src} onClick={handleImageClick}alt="" />
     </>
   );
 };

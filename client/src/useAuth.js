@@ -2,27 +2,28 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useAuth = (code) => {
-
+  console.log('useAuth called');
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    axios.post('http://localhost:3000/login', {
-      code: code
+    axios.post('http://localhost:3000/spotifyLogin', {
+      code,
     })
-      .then(res => {
-        // console.log(res.data)
+      .then((res) => {
+        console.log('access Token: ', res.data.accessToken);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
       })
       .catch((err) => {
+        console.log(err);
         window.location = '/';
-      })
-  }, [code])
+      });
+  }, [code]);
 
   return accessToken;
-}
+};
 
-export default useAuth
+export default useAuth;
