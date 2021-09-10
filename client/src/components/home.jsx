@@ -13,10 +13,12 @@ import useAuth from '../useAuth';
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
+  // let [value, setValue] = useState('chill');
   const accessToken = useAuth(code);
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
+  // const [currentSearchValue, setCurrentSearchValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [intervalState, setIntervalState] = useState(true);
 
@@ -24,11 +26,20 @@ const Home = () => {
     setLoggedIn(userLoggedIn);
   }, [userLoggedIn]);
 
+  // const handleSearchChange = (e) => {
+  //   setCurrentSearchValue(e.target.value);
+  // };
+
+  // const handleSearchSubmit = (e) => {
+  //   e.preventDefault();
+  //   setSearchTerm(currentSearchValue);
+  // };
+
   const handleLoginClick = () => {
     dispatch(openModal());
   };
 
-  const toggleImagePlay = () => {
+  const pause = () => {
     console.log(intervalState);
     // if (intervalState) {
     //   setIntervalState(false)
