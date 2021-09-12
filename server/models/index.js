@@ -39,6 +39,17 @@ const db = {
       }
     });
   },
+  getUrls: (userId, callback) => {
+    const queryString = `SELECT url FROM image_urls WHERE user_id = ${userId}`;
+
+    pool.query(queryString, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+    });
+  },
 };
 
 module.exports = db;

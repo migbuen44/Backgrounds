@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.post('/save', (req, res) => {
+router.post('/images', (req, res) => {
   const { token, photoUrl } = req.body;
 
   jwt.verify(token, secret, (err, user) => {
@@ -76,6 +76,17 @@ router.post('/save', (req, res) => {
       res.sendStatus(200);
     });
     // res.sendStatus(200);
+  });
+});
+
+router.get('/images/:userId', (req, res) => {
+  const { userId } = req.query;
+
+  // use db function to retrieve data from database
+  db.getUrls(userId, (err, result) => {
+    if (err) return res.sendStatus(404);
+
+    res.send(result);
   });
 });
 
