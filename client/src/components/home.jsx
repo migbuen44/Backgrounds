@@ -14,6 +14,7 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
   const accessToken = useAuth(code);
+  // const accessToken = null;
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);

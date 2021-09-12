@@ -9,7 +9,7 @@ export const userLoginSlice = createSlice({
     loginUser: (state) => {
       state.value = true;
     },
-    logoutUsert: (state) => {
+    logoutUser: (state) => {
       state.value = false;
     },
   },

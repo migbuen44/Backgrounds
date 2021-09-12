@@ -13,18 +13,20 @@ router.post('/signup', (req, res) => {
     // console.log('hashed password: ', hash);
     if (error) return res.sendStatus(500);
 
-    const userInfo = {
+    const user = {
       name,
       email,
       password: hash,
     };
 
-    db.addUser(userInfo, (err) => {
-      if (err) return res.sendStatus(400);
+    db.addUser(user, (dbErr, dbResult) => {
+      if (dbErr) return res.sendStatus(400);
 
-      const user = { name, email };
+      const userInfo = dbResult.rows[0];
+      const { id, name, email } = userInfo;
+      const userSign = { id, name, email };
 
-      jwt.sign(user, secret, (jwtErr, token) => {
+      jwt.sign(userSign, secret, (jwtErr, token) => {
         if (jwtErr) return res.sendStatus(500);
 
         res.send({ user, token });
@@ -46,8 +48,8 @@ router.post('/login', (req, res) => {
       .then((passwordResult) => {
         if (!passwordResult) return res.sendStatus(401);
 
-        const { name, email } = userInfo;
-        const user = { name, email };
+        const { id, name, email } = userInfo;
+        const user = { id, name, email };
 
         jwt.sign(user, secret, (jwtErr, token) => {
           if (jwtErr) return res.sendStatus(500);
@@ -59,14 +61,21 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/save', (req, res) => {
-  const token = req.body.token;
+  const { token, photoUrl } = req.body;
 
   jwt.verify(token, secret, (err, user) => {
     if (err) return res.sendStatus(401);
-
-    console.log('authorized user');
+    const { id } = user;
+    // console.log('authorized user');
+    // console.log('user: ', user);
     console.log('user: ', user);
-    res.sendStatus(200);
+    console.log('photoUrl: ', photoUrl);
+    db.addUrl({ userId: id, photoUrl }, (dbErr) => {
+      if (dbErr) return res.sendStatus(400);
+
+      res.sendStatus(200);
+    });
+    // res.sendStatus(200);
   });
 });
 

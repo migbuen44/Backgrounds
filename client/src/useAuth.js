@@ -8,7 +8,7 @@ const useAuth = (code) => {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    axios.post('http://localhost:3000/spotifyLogin', {
+    axios.post('http://localhost:4000/spotifyLogin', {
       code,
     })
       .then((res) => {
@@ -19,7 +19,7 @@ const useAuth = (code) => {
       })
       .catch((err) => {
         console.log(err);
-        window.location = '/';
+        // window.location = '/';
       });
   }, [code]);
 

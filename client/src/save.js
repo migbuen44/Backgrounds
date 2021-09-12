@@ -3,8 +3,9 @@ import info from './info';
 
 const { url } = info;
 
-const save = (token) => {
-  axios.post(`${url}/save`, { token })
+const save = (photoUrl) => {
+  const token = localStorage.getItem('access_token');
+  axios.post(`${url}/save`, { token, photoUrl })
     .then(() => {
       console.log('success');
     })
