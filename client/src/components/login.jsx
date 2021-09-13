@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../slices/userLoginSlice';
 import { setUserInfo } from '../slices/userInfoSlice';
+import { updateSavedImages } from '../slices/savedImagesSlice';
 import info from '../info';
+// import getImages from '../getImages';
 
 const { url } = info;
 const { localStorage } = window;
@@ -17,6 +19,23 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const getImages = (token) => {
+    // const dispatch = useDispatch();
+    // const token = localStorage.getItem('access_token');
+    axios.get(`${url}/images/${token}`)
+      .then((response) => {
+        const savedImages = response.data.rows;
+        console.log('savedImages: ', savedImages);
+        const formattedSavedImages = savedImages.map((image) => image.url);
+        console.log('formattedSavedImages: ', formattedSavedImages);
+        dispatch(updateSavedImages(formattedSavedImages));
+        // set redux saved Images state to savedImages value
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleLoginClick = () => {
     axios.post(`${url}/login`, { email, password })
       .then((response) => {
@@ -27,6 +46,7 @@ const Login = () => {
         console.log('localStorageTest: ', localStorageTest);
         dispatch(setUserInfo(user));
         dispatch(loginUser());
+        getImages(token);
         console.log('userLoggedIn: ', userLoggedIn);
         console.log('userInfo: ', userInfo);
       })

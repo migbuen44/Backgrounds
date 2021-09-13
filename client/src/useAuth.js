@@ -19,7 +19,7 @@ const useAuth = (code) => {
       })
       .catch((err) => {
         console.log(err);
-        // window.location = '/';
+        window.location = '/';
       });
   }, [code]);
 

@@ -99,7 +99,6 @@ body {
   display: flex;
   position: absolute;
   top: 0;
-  right: 180px;
   background-color: rgba(184, 184, 184, .8);
   border-radius: 50%;
   width: 40px;
@@ -109,6 +108,14 @@ body {
   justify-content: center;
   align-items: center;
   margin: 10px;
+}
+
+.loginContainer {
+  right: 180px;
+}
+
+.saveSelectContainer {
+  left: 180px;
 }
 
 .songTile {

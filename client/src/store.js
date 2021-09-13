@@ -7,7 +7,7 @@ import currentSongReducer from './slices/currentSongSlice';
 import currentSongIdxReducer from './slices/currentSongIdxSlice';
 import searchedImagesReducer from './slices/searchedImagesSlice';
 import savedImagesReducer from './slices/savedImagesSlice';
-import imageDisplayModeReducer from './slices/imageDisplayModeSlice';
+import savedImagesSelectedReducer from './slices/savedImagesSelectedSlice';
 
 export default configureStore({
   reducer: {
@@ -19,6 +19,6 @@ export default configureStore({
     currentSongIdx: currentSongIdxReducer,
     searchedImages: searchedImagesReducer,
     savedImages: savedImagesReducer,
-    imageDisplayMode: imageDisplayModeReducer,
+    savedImagesSelected: savedImagesSelectedReducer,
   },
 });

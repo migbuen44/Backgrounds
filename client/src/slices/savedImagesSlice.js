@@ -9,9 +9,12 @@ export const savedImagesSlice = createSlice({
     updateSavedImages: (state, action) => {
       state.value = action.payload;
     },
+    addToSavedImages: (state, action) => {
+      state.value = [...state.value, action.payload];
+    },
   },
 });
 
-export const { updateSavedImages } = savedImagesSlice.actions;
+export const { updateSavedImages, addToSavedImages } = savedImagesSlice.actions;
 
 export default savedImagesSlice.reducer;

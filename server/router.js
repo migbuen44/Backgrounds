@@ -79,15 +79,26 @@ router.post('/images', (req, res) => {
   });
 });
 
-router.get('/images/:userId', (req, res) => {
-  const { userId } = req.query;
+router.get('/images/:token', (req, res) => {
+  // const { userId } = req.query;
+  const { token } = req.params;
+
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
+    const { id } = user;
+    db.getUrls(id, (err, result) => {
+      if (err) return res.sendStatus(404);
+      res.send(result);
+    });
+    // res.sendStatus(200);
+  });
 
   // use db function to retrieve data from database
-  db.getUrls(userId, (err, result) => {
-    if (err) return res.sendStatus(404);
+  // db.getUrls(userId, (err, result) => {
+  //   if (err) return res.sendStatus(404);
 
-    res.send(result);
-  });
+  //   res.send(result);
+  // });
 });
 
 router.post('/spotifyLogin', (req, res) => {

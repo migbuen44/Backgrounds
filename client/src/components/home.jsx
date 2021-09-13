@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserSlash } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { openModal } from '../slices/loginModalSlice';
+import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
 import LoginModal from './loginModal';
 import SongContainer from './songContainer';
@@ -17,7 +18,9 @@ const Home = () => {
   // const accessToken = null;
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
+  const userSelectedSavedImages = useSelector((state) => state.savedImagesSelected.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
+  const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
   const [searchTerm, setSearchTerm] = useState('');
   const [intervalState, setIntervalState] = useState(true);
 
@@ -25,24 +28,22 @@ const Home = () => {
     setLoggedIn(userLoggedIn);
   }, [userLoggedIn]);
 
+  useEffect(() => {
+    setSavedImagesSelected(userSelectedSavedImages);
+  }, [userSelectedSavedImages]);
+
   const handleLoginClick = () => {
     dispatch(openModal());
   };
 
-  const toggleImagePlay = () => {
-    console.log(intervalState);
-    // if (intervalState) {
-    //   setIntervalState(false)
-    // } else {
-    //   setIntervalState(true)
-    // }
-    // if (currentInterval && intervalState) {
-    //   clearInterval(currentInterval)
-    // } else {
-    //   var slideShowTimer = setInterval(changeImg.bind(i), 3000);
-    //   setCurrentInterval(slideShowTimer)
-    // }
-  };
+  const handleSavedClicked = () => {
+    dispatch(selectSavedImages());
+  }
+
+  const handleSearchedClicked = () => {
+    dispatch(selectSearchedImages());
+  }
+
   return (
     <>
       <ImageContainer search={searchTerm} />
@@ -50,15 +51,27 @@ const Home = () => {
       <Search setSearchTerm={setSearchTerm} />
       {loggedIn
         ? (
-          <div className="iconCircle" onClick={handleLoginClick}>
-            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
+          <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
           </div>
         )
         : (
-        <div className="iconCircle" onClick={handleLoginClick}>
-          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
+        <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
         </div>
         )}
+      {savedImagesSelected
+        ? (
+          <div className="iconCircle saveSelectContainer" onClick={handleSearchedClicked}>
+            <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
+          </div>
+        )
+        : (
+          <div className="iconCircle saveSelectContainer" onClick={handleSavedClicked}>
+            <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
+          </div>
+        )
+      }
       <LoginModal />
       <MusicPlayer accessToken={accessToken} />
     </>
