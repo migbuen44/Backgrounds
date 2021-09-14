@@ -73,7 +73,7 @@ const Home = () => {
         )
       }
       <LoginModal />
-      <MusicPlayer accessToken={accessToken} />
+      <MusicPlayer className="musicPlayer" accessToken={accessToken} />
     </>
   );
 };

@@ -48,8 +48,9 @@ body {
   align-items: center;
   justify-content: center;
   /* border: 1px solid black; */
-  background:rgba(255, 255, 255, .6)
+  background:rgba(255, 255, 255, .6);
   /* opacity: 0.6; */
+  z-index: 60;
 }
 
 .searchBar {
@@ -178,4 +179,17 @@ body {
 .plusIcon {
   /* align-self: center; */
   color: white;
+}
+
+.toggle {
+  position: absolute;
+  top: 10vh;
+  bottom: 10vh;
+  left: 180px;
+  right: 180px;
+  z-index: 50;
+}
+
+.musicPlayer {
+  z-index: 60;
 }

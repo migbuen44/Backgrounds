@@ -123,7 +123,7 @@ const ImageContainer = ({ search }) => {
 
   return (
     <>
-      <div onClick={toggle} style={{position: 'absolute', left: '30vw'}}>Toggle</div>
+      <div onClick={toggle} className="toggle" />
       <div className="imageContainer">
         {backgrounds.map((background, idx) =>
           <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}
