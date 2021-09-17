@@ -52,14 +52,19 @@ const Home = () => {
       <ImageContainer search={searchTerm} />
       {
         accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
-          : <div className="songContainer">Song Container</div>
+          : (
+            // <div className="songContainerHolder">
+            //   <div className="containerHolderMessage">Sign in to Spotify to see songs</div>
+            // </div>
+            <SpotifyLoginButton />
+          )
       }
       {/* <SongContainer search={searchTerm} accessToken={accessToken} /> */}
       <Search setSearchTerm={setSearchTerm} />
-      {
+      {/* {
         accessToken ? <></>
           : <SpotifyLoginButton />
-      }
+      } */}
       {loggedIn
         ? (
           <div className="iconCircle loginContainer" onClick={handleLoginClick}>
@@ -86,7 +91,11 @@ const Home = () => {
       <LoginModal />
       {
         accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
-          : <div className="musicPlayer">MusicPlayer</div>
+          : (
+            <div className="musicPlayerHolder">
+              <div className="playerHolderMessage">Sign in to Spotify to play songs</div>
+            </div>
+          )
       }
       {/* <MusicPlayer className="musicPlayer" accessToken={accessToken} /> */}
     </>

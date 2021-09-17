@@ -104,7 +104,7 @@ body {
   text-decoration: none;
   position: absolute;
   top: 0;
-  right: 240px;
+  right: 25px;
   margin: 10px;
 
 }
@@ -148,6 +148,40 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+}
+
+.songContainerHolder {
+  position: absolute;
+  top: 0;
+  right: 0.5vw;
+  width: 180px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, .6);
+}
+
+.containerHolderMessage {
+  text-align: center;
+  width: 110px;
+}
+
+.musicPlayerHolder {
+  position: absolute;
+  width: 99%;
+  height: 8vh;
+  bottom: 0;
+  z-index: 300;
+  background-color: rgba(255, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerHolderMessage {
+  text-align: center;
 }
 
 .songTile {
