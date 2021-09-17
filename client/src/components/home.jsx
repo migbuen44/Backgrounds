@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserSlash } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { openModal } from '../slices/loginModalSlice';
+import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
 import LoginModal from './loginModal';
 import SongContainer from './songContainer';
 import ImageContainer from './imageContainer';
 import Search from './search';
 import useAuth from '../useAuth';
+import SpotifyLoginButton from './spotifyLogin';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -17,60 +19,86 @@ const Home = () => {
   const accessToken = useAuth(code);
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
+  const userSelectedSavedImages = useSelector((state) => state.savedImagesSelected.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
-  // const [currentSearchValue, setCurrentSearchValue] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [intervalState, setIntervalState] = useState(true);
+  const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
+  const [searchTerm, setSearchTerm] = useState('cool');
 
   useEffect(() => {
     setLoggedIn(userLoggedIn);
   }, [userLoggedIn]);
 
-  // const handleSearchChange = (e) => {
-  //   setCurrentSearchValue(e.target.value);
-  // };
-
-  // const handleSearchSubmit = (e) => {
-  //   e.preventDefault();
-  //   setSearchTerm(currentSearchValue);
-  // };
+  useEffect(() => {
+    setSavedImagesSelected(userSelectedSavedImages);
+  }, [userSelectedSavedImages]);
 
   const handleLoginClick = () => {
     dispatch(openModal());
   };
 
-  const pause = () => {
-    console.log(intervalState);
-    // if (intervalState) {
-    //   setIntervalState(false)
-    // } else {
-    //   setIntervalState(true)
-    // }
-    // if (currentInterval && intervalState) {
-    //   clearInterval(currentInterval)
-    // } else {
-    //   var slideShowTimer = setInterval(changeImg.bind(i), 3000);
-    //   setCurrentInterval(slideShowTimer)
-    // }
+  const handleSavedClicked = () => {
+    dispatch(selectSavedImages());
   };
+
+  const handleSearchedClicked = () => {
+    dispatch(selectSearchedImages());
+  };
+
+  // if (!accessToken) {
+  //   return <></>;
+  // }
+
   return (
     <>
       <ImageContainer search={searchTerm} />
-      <SongContainer search={searchTerm} accessToken={accessToken} />
+      {
+        accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
+          : (
+            // <div className="songContainerHolder">
+            //   <div className="containerHolderMessage">Sign in to Spotify to see songs</div>
+            // </div>
+            <SpotifyLoginButton />
+          )
+      }
+      {/* <SongContainer search={searchTerm} accessToken={accessToken} /> */}
       <Search setSearchTerm={setSearchTerm} />
+      {/* {
+        accessToken ? <></>
+          : <SpotifyLoginButton />
+      } */}
       {loggedIn
         ? (
-          <div className="iconCircle" onClick={handleLoginClick}>
-            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
+          <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
           </div>
         )
         : (
-        <div className="iconCircle" onClick={handleLoginClick}>
-          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
+        <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
         </div>
         )}
+      {savedImagesSelected
+        ? (
+          <div className="iconCircle saveSelectContainer" onClick={handleSearchedClicked}>
+            <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
+          </div>
+        )
+        : (
+          <div className="iconCircle saveSelectContainer" onClick={handleSavedClicked}>
+            <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
+          </div>
+        )
+      }
       <LoginModal />
-      <MusicPlayer accessToken={accessToken} />
+      {
+        accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
+          : (
+            <div className="musicPlayerHolder">
+              <div className="playerHolderMessage">Sign in to Spotify to play songs</div>
+            </div>
+          )
+      }
+      {/* <MusicPlayer className="musicPlayer" accessToken={accessToken} /> */}
     </>
   );
 };

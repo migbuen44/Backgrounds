@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import info from '../info';
 import Image from './image';
+import { updateSearchedImages } from '../slices/searchedImagesSlice';
 
 const style = {
   position: 'relative',
@@ -16,17 +18,30 @@ const style = {
 const ImageContainer = ({ search }) => {
   console.log('imagecontainer');
   console.log('search: ', search);
+  const dispatch = useDispatch();
+  const savedImagesSelected = useSelector((state) => state.savedImagesSelected.value);
+  const savedImages = useSelector((state) => state.savedImages.value);
+  const searchedImages = useSelector((state) => state.searchedImages.value);
   const [backgrounds, setBackgrounds] = useState([]);
   const [currentInterval, setCurrentInterval] = useState();
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [imageClickedIdx, setImageClickedIdx] = useState(0);
   const [imagePaused, setImagePaused] = useState(false);
 
-  let currentImage = 0;
+  useEffect(() => {
+    if (savedImagesSelected) {
+      setBackgrounds(savedImages);
+    } else {
+      setBackgrounds(searchedImages);
+    }
+  }, [savedImagesSelected]);
+
+  let imageIdx = 0;
+  console.log('currentImageIdx: ', currentImageIdx);
   const { pexelsAuth } = info;
 
   const changeImg = (idx) => {
-    document.body.style.backgroundImage = `url(${backgrounds[idx].src.landscape})`;
+    document.body.style.backgroundImage = `url(${backgrounds[idx]})`;
   };
 
   const cycleImg = () => {
@@ -72,7 +87,12 @@ const ImageContainer = ({ search }) => {
     axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
       .then((data) => {
         const { photos } = data.data;
-        setBackgrounds(photos);
+        console.log('photos: ', photos);
+        const formattedPhotos = photos.map((photo) => photo.src.landscape);
+        // setBackgrounds(photos);
+        setBackgrounds(formattedPhotos);
+        // dispatch(updateSearchedImages(photos));
+        dispatch(updateSearchedImages(formattedPhotos));
       });
   }, [search]);
 
@@ -95,7 +115,7 @@ const ImageContainer = ({ search }) => {
 
   return (
     <>
-      <div onClick={toggle} style={{position: 'absolute', left: '30vw'}}>Toggle</div>
+      <div onClick={toggle} className="toggle" />
       <div className="imageContainer">
         {backgrounds.map((background, idx) =>
           <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}

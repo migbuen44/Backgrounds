@@ -1,12 +1,14 @@
 body {
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: Roboto;
 }
 
 .player {
   position: absolute;
+  width: 99%;
   bottom: 0;
-  width: 99%;;
+  z-index: 300;
 }
 
 .imageContainer {
@@ -18,11 +20,24 @@ body {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  /* align-content: center; */
+  /* justify-content: center; */
   margin-top: 10px;
 }
 
-.songContainer {
+.singleImageContainer {
+  align-self: center;
+}
+
+.singleImage {
+  position: relative;
+  align-self: center;
+  height: 70px;
+  z-index: 100;
+  right: 0.5vw;
+}
+
+/* .songContainer {
   position: absolute;
   top: 0;
   right: 0;
@@ -33,7 +48,7 @@ body {
   flex-direction: column;
   align-content: center;
   margin-top: 10px;
-}
+} */
 
 .search {
   display: flex;
@@ -48,8 +63,9 @@ body {
   align-items: center;
   justify-content: center;
   /* border: 1px solid black; */
-  background:rgba(255, 255, 255, .6)
+  background:rgba(255, 255, 255, .6);
   /* opacity: 0.6; */
+  z-index: 60;
 }
 
 .searchBar {
@@ -76,17 +92,21 @@ body {
 }
 
 .spotifyLoginButton {
-  display: block;
-  width: 115px;
-  height: 25px;
+  display: flex;
+  width: 100px;
+  height: 18px;
   background: #1DB954;
   padding: 10px;
   text-align: center;
-  border-radius: 5px;
+  justify-content: center;
   color: white;
   font-weight: bold;
-  line-height: 25px;
   text-decoration: none;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  margin: 10px;
+
 }
 
 .loginButton, .userButton {
@@ -99,7 +119,6 @@ body {
   display: flex;
   position: absolute;
   top: 0;
-  right: 180px;
   background-color: rgba(184, 184, 184, .8);
   border-radius: 50%;
   width: 40px;
@@ -111,23 +130,154 @@ body {
   margin: 10px;
 }
 
+.loginContainer {
+  right: 180px;
+}
+
+.saveSelectContainer {
+  left: 180px;
+}
+
+.songContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 90vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.songContainerHolder {
+  position: absolute;
+  top: 0;
+  right: 0.5vw;
+  width: 180px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, .6);
+}
+
+.containerHolderMessage {
+  text-align: center;
+  width: 110px;
+}
+
+.musicPlayerHolder {
+  position: absolute;
+  width: 99%;
+  height: 8vh;
+  bottom: 0;
+  z-index: 300;
+  background-color: rgba(255, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerHolderMessage {
+  text-align: center;
+}
+
 .songTile {
+  background-position: left;
+  background-size: 50px;
+  background-color: rgba(0, 0, 0, .5);
   height: 70px;
+  width: 170px;
+  position: relative;
+  right: 0.5vw;
+  margin-right: 7px;
   margin-bottom: 7px;
   color: white;
+  font-size: 14px;
+  margin-right: 3px;
+  display: flex;
+  /* flex-direction: row; */
+  align-content: center;
+  justify-content: end;
+}
+
+.songName {
+  text-align: right;
+  margin: 5px;
+  margin-left: 0.5vw;
+  align-self: center;
+  display: flex;
+  justify-content: center;
 }
 
 .albumImage {
-  position: relative;
-  right: 0.5vw;
-  float: right;
+  /* position: relative; */
+  /* right: 0.5vw; */
+  /* float: right; */
   height: 60px;
   display: block;
-  margin-right: 7px;
-  align-self: center;
+  /* margin-right: 7px; */
+  margin-left: 7px;
+  /* align-self: center; */
 };
 
-.songName {
+/* .songName {
   font-size: 14px;
   margin-right: 3px;
+} */
+
+.singleImageContainer {
+  position: relative;
+  right: 0.5vw;
+  height: 70px;
+  width: auto;
+  display: block;
+  margin-bottom: 8px;
+  align-self: center;
+}
+
+.singleImage {
+  /* position: relative;
+  right: 0.5vw;
+  height: 70px;
+  display: block;
+  margin-bottom: 8px;
+  align-self: center; */
+  /* height: 70px;
+  z-index: 100; */
+}
+
+.plusContainer {
+  display: flex;
+  position: absolute;
+  z-index: 200;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(184, 184, 184, .8);
+  margin: 2px;
+}
+
+.plusIcon {
+  /* align-self: center; */
+  color: white;
+}
+
+.toggle {
+  position: absolute;
+  top: 10vh;
+  bottom: 10vh;
+  left: 180px;
+  right: 180px;
+  z-index: 50;
+}
+
+.musicPlayer {
+  z-index: 60;
 }

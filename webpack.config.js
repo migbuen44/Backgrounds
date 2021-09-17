@@ -11,6 +11,13 @@ module.exports = {
   },
   mode: 'development',
   watch: true,
+  devServer: {
+    // static: './client/dist',
+    port: 3000,
+    contentBase: DIST_DIR,
+    open: true,
+    hot: true,
+  },
   module: {
     rules: [
       {

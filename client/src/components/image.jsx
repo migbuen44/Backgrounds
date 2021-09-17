@@ -1,23 +1,39 @@
 /* eslint-disable react/prop-types */
 import React, {useState, useEffect} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import save from '../save';
+import { addToSavedImages } from '../slices/savedImagesSlice';
 
 const Image = ({
   background,
-  style,
   setImageClickedIdx,
   idx,
 }) => {
-  // let [fullImageIsOpen, setFullImageIsOpen] = useState(false);
-  const src = background.src.landscape;
+  const dispatch = useDispatch();
+  const userLoggedIn = useSelector((state) => state.userLogin.value);
+  const savedImagesSelected = useSelector((state) => state.savedImagesSelected.value);
+  const src = background;
 
   const handleImageClick = () => {
     setImageClickedIdx(idx);
   };
 
+  const handleSaveClick = () => {
+    save(src);
+    dispatch(addToSavedImages(src));
+  };
+
   return (
-    <>
-      <img style={style} src={src} onClick={handleImageClick}alt="" />
-    </>
+    <div className="singleImageContainer">
+      <img src={src} className="singleImage" onClick={handleImageClick}alt="" />
+      {(userLoggedIn && !savedImagesSelected) ? (
+        <div className="plusContainer" onClick={handleSaveClick}>
+          <FontAwesomeIcon icon={faPlus} className="plusIcon" style={{ color: 'black' }} />
+        </div>
+      ) : <></>}
+    </div>
   );
 };
 

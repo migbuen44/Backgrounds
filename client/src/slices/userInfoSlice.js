@@ -4,6 +4,7 @@ export const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState: {
     value: {
+      id: null,
       name: null,
       email: null,
     },

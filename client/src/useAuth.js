@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const useAuth = (code) => {
   console.log('useAuth called');
-  const [accessToken, setAccessToken] = useState();
+  const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    axios.post('http://localhost:3000/spotifyLogin', {
+    axios.post('http://localhost:4000/spotifyLogin', {
       code,
     })
       .then((res) => {
@@ -19,7 +19,8 @@ const useAuth = (code) => {
       })
       .catch((err) => {
         console.log(err);
-        window.location = '/';
+        setAccessToken(null);
+        // window.location = '/';
       });
   }, [code]);
 
