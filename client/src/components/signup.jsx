@@ -6,7 +6,7 @@ import info from '../info';
 const { url } = info;
 const { localStorage } = window;
 
-const SignUp = () => {
+const SignUp = ({ setDisplaySignUp }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -37,6 +37,10 @@ const SignUp = () => {
     setEmail(e.target.value);
   };
 
+  const handleLoginClick = () => {
+    setDisplaySignUp(false);
+  };
+
   return (
     <>
       <div>SignUp Page</div>
@@ -54,9 +58,7 @@ const SignUp = () => {
           <input type="password" className="password" onChange={handlePasswordChange} />
         </div>
         <button type="button" className="signUp" onClick={handleSignUpClick}>SignUp</button>
-        <button type="button" className="toLogin">
-          <Link to="/login">Login</Link>
-        </button>
+        <button type="button" className="toLogin" onClick={handleLoginClick}>Login</button>
       </form>
     </>
   );

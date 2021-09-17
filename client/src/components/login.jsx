@@ -7,6 +7,7 @@ import { loginUser } from '../slices/userLoginSlice';
 import { setUserInfo } from '../slices/userInfoSlice';
 import { updateSavedImages } from '../slices/savedImagesSlice';
 import info from '../info';
+import SignUp from './signup';
 // import getImages from '../getImages';
 
 const { url } = info;
@@ -18,6 +19,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displaySignUp, setDisplaySignUp] = useState(false);
 
   const getImages = (token) => {
     // const dispatch = useDispatch();
@@ -63,6 +65,16 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const handleSignUpClick = () => {
+    setDisplaySignUp(true);
+  };
+
+  if (displaySignUp) {
+    return (
+      <SignUp setDisplaySignUp={setDisplaySignUp}/>
+    );
+  }
+
   return (
     <>
       <div>LoginPage</div>
@@ -76,9 +88,7 @@ const Login = () => {
           <input type="password" className="password" onChange={handlePasswordChange} />
         </div>
         <button type="button" className="submitLogin" onClick={handleLoginClick}>Login</button>
-        <button type="button" className="toSignUp">
-          <Link to="/signup">SignUp</Link>
-        </button>
+        <button type="button" className="toSignUp" onClick={handleSignUpClick}>SignUp</button>
       </form>
     </>
   );
