@@ -15,6 +15,7 @@ import SpotifyLoginButton from './spotifyLogin';
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
+  // let [value, setValue] = useState('chill');
   const accessToken = useAuth(code);
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
