@@ -10,19 +10,18 @@ import SongContainer from './songContainer';
 import ImageContainer from './imageContainer';
 import Search from './search';
 import useAuth from '../useAuth';
+import SpotifyLoginButton from './spotifyLogin';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
   const accessToken = useAuth(code);
-  // const accessToken = null;
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
   const userSelectedSavedImages = useSelector((state) => state.savedImagesSelected.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
   const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [intervalState, setIntervalState] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('cool');
 
   useEffect(() => {
     setLoggedIn(userLoggedIn);
@@ -38,17 +37,29 @@ const Home = () => {
 
   const handleSavedClicked = () => {
     dispatch(selectSavedImages());
-  }
+  };
 
   const handleSearchedClicked = () => {
     dispatch(selectSearchedImages());
-  }
+  };
+
+  // if (!accessToken) {
+  //   return <></>;
+  // }
 
   return (
     <>
       <ImageContainer search={searchTerm} />
-      <SongContainer search={searchTerm} accessToken={accessToken} />
+      {
+        accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
+          : <div className="songContainer">Song Container</div>
+      }
+      {/* <SongContainer search={searchTerm} accessToken={accessToken} /> */}
       <Search setSearchTerm={setSearchTerm} />
+      {
+        accessToken ? <></>
+          : <SpotifyLoginButton />
+      }
       {loggedIn
         ? (
           <div className="iconCircle loginContainer" onClick={handleLoginClick}>
@@ -73,7 +84,11 @@ const Home = () => {
         )
       }
       <LoginModal />
-      <MusicPlayer className="musicPlayer" accessToken={accessToken} />
+      {
+        accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
+          : <div className="musicPlayer">MusicPlayer</div>
+      }
+      {/* <MusicPlayer className="musicPlayer" accessToken={accessToken} /> */}
     </>
   );
 };
