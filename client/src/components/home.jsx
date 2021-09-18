@@ -46,6 +46,7 @@ const Home = () => {
   // if (!accessToken) {
   //   return <></>;
   // }
+  console.log('access Token before home return: ', accessToken);
 
   return (
     <>
@@ -97,7 +98,6 @@ const Home = () => {
             </div>
           )
       }
-      {/* <MusicPlayer className="musicPlayer" accessToken={accessToken} /> */}
     </>
   );
 };
