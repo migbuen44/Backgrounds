@@ -38,7 +38,8 @@ const Login = () => {
       });
   };
 
-  const handleLoginClick = () => {
+  const handleLoginClick = (e) => {
+    e.preventDefault();
     axios.post(`${url}/login`, { email, password })
       .then((response) => {
         console.log(response.data);
@@ -53,7 +54,7 @@ const Login = () => {
         console.log('userInfo: ', userInfo);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('login error: ', err);
       });
   };
 
@@ -77,19 +78,21 @@ const Login = () => {
 
   return (
     <>
-      <div>LoginPage</div>
-      <form>
-        <div>
-          <label>Email: </label>
-          <input type="email" className="email" onChange={handleEmailChange} />
-        </div>
-        <div>
-          <label>Password: </label>
-          <input type="password" className="password" onChange={handlePasswordChange} />
-        </div>
-        <button type="button" className="submitLogin" onClick={handleLoginClick}>Login</button>
-        <button type="button" className="toSignUp" onClick={handleSignUpClick}>SignUp</button>
-      </form>
+      <div className="userInfo">
+        <h2 className="header">Login</h2>
+        <form onSubmit={handleLoginClick}>
+          <div>
+            <label>Email </label>
+            <input type="email" className="email" onChange={handleEmailChange} />
+          </div>
+          <div>
+            <label>Password </label>
+            <input type="password" className="password" onChange={handlePasswordChange} />
+          </div>
+          <button type="submit" className="submitLogin" onClick={handleLoginClick}>Login</button>
+          <button type="button" className="toSignUp" onClick={handleSignUpClick}>SignUp</button>
+        </form>
+      </div>
     </>
   );
 };

@@ -43,6 +43,14 @@ const Home = () => {
     dispatch(selectSearchedImages());
   };
 
+  const handleSavedMouseEnter = () => {
+    console.log('enter');
+  };
+
+  const handleSavedMouseLeave = () => {
+    console.log('leave');
+  };
+
   // if (!accessToken) {
   //   return <></>;
   // }
@@ -84,7 +92,11 @@ const Home = () => {
           </div>
         )
         : (
-          <div className="iconCircle saveSelectContainer" onClick={handleSavedClicked}>
+          <div
+            className="iconCircle saveSelectContainer"
+            onMouseEnter={handleSavedMouseEnter}
+            onMouseLeave={handleSavedMouseLeave}
+            onClick={handleSavedClicked}>
             <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
           </div>
         )
