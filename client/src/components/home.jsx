@@ -84,24 +84,24 @@ const Home = () => {
       } */}
       {loggedIn
         ? (
-          <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+          <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
             <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
           </div>
         )
         : (
-        <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+        <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
           <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
         </div>
         )}
       {savedImagesSelected
         ? (
-          <div className="iconCircle saveSelectContainer" onClick={handleSearchedClicked}>
+          <div className="iconCircle saveSelectContainer click" onClick={handleSearchedClicked}>
             <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
           </div>
         )
         : (
           <div
-            className="iconCircle saveSelectContainer"
+            className="iconCircle saveSelectContainer click"
             onMouseEnter={handleSavedMouseEnter}
             onMouseLeave={handleSavedMouseLeave}
             onClick={handleSavedClicked}>

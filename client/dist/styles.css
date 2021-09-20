@@ -383,3 +383,7 @@ label {
   padding-right: 7px;
   border-radius: 20px;
 }
+
+.click {
+  cursor: pointer;
+}

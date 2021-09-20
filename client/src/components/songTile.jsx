@@ -22,7 +22,7 @@ const SongTile = ({ song }) => {
   return (
     <div className="songTile">
       <div className="songName">{songName}</div>
-      <img className="albumImage" src={albumImageUrl} alt="" onClick={onTileImageClick} />
+      <img className="albumImage click" src={albumImageUrl} alt="" onClick={onTileImageClick} />
     </div>
   );
 };
