@@ -8,6 +8,7 @@ import { setUserInfo } from '../slices/userInfoSlice';
 import { updateSavedImages } from '../slices/savedImagesSlice';
 import info from '../info';
 import SignUp from './signup';
+import { closeModal } from '../slices/loginModalSlice';
 // import getImages from '../getImages';
 
 const { url } = info;
@@ -20,6 +21,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displaySignUp, setDisplaySignUp] = useState(false);
+  const [invalidLogin, setInvalidLogin] = useState(false);
 
   const getImages = (token) => {
     // const dispatch = useDispatch();
@@ -39,6 +41,7 @@ const Login = () => {
   };
 
   const handleLoginClick = (e) => {
+    setInvalidLogin(false);
     e.preventDefault();
     axios.post(`${url}/login`, { email, password })
       .then((response) => {
@@ -50,11 +53,13 @@ const Login = () => {
         dispatch(setUserInfo(user));
         dispatch(loginUser());
         getImages(token);
+        dispatch(closeModal());
         console.log('userLoggedIn: ', userLoggedIn);
         console.log('userInfo: ', userInfo);
       })
       .catch((err) => {
         console.log('login error: ', err);
+        setInvalidLogin(true);
       });
   };
 
@@ -72,7 +77,7 @@ const Login = () => {
 
   if (displaySignUp) {
     return (
-      <SignUp setDisplaySignUp={setDisplaySignUp}/>
+      <SignUp setDisplaySignUp={setDisplaySignUp} />
     );
   }
 
@@ -80,6 +85,7 @@ const Login = () => {
     <>
       <div className="userInfo">
         <h2 className="header">Login</h2>
+        {invalidLogin ? <div className="invalidLogin">Invalid username or password</div> : <></>}
         <form onSubmit={handleLoginClick}>
           <div>
             <label>Email </label>

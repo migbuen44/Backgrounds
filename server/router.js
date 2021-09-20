@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   db.getUser(email, (dbErr, dbResult) => {
-    if (dbErr) return res.sendStatus(404);
+    if (dbErr || !dbResult.rows.length) return res.sendStatus(404);
 
     const userInfo = dbResult.rows[0];
     const hashedPassword = userInfo.password;
