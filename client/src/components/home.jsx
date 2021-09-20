@@ -22,6 +22,7 @@ const Home = () => {
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
   const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
   const [searchTerm, setSearchTerm] = useState('cool');
+  const [displayLoginPrompt, setDisplayLoginPrompt] = useState(false);
 
   useEffect(() => {
     setLoggedIn(userLoggedIn);
@@ -36,6 +37,9 @@ const Home = () => {
   };
 
   const handleSavedClicked = () => {
+    if (!userLoggedIn) {
+      return;
+    }
     dispatch(selectSavedImages());
   };
 
@@ -45,10 +49,14 @@ const Home = () => {
 
   const handleSavedMouseEnter = () => {
     console.log('enter');
+    if(!userLoggedIn) {
+      setDisplayLoginPrompt(true);
+    }
   };
 
   const handleSavedMouseLeave = () => {
     console.log('leave');
+    setDisplayLoginPrompt(false);
   };
 
   // if (!accessToken) {
@@ -98,6 +106,8 @@ const Home = () => {
             onMouseLeave={handleSavedMouseLeave}
             onClick={handleSavedClicked}>
             <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
+            {displayLoginPrompt ? <span className="loginPrompt">Login to view saved backgrounds</span>
+              : <></>}
           </div>
         )
       }

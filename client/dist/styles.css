@@ -26,7 +26,15 @@ body {
 }
 
 .singleImageContainer {
+  position: relative;
+  right: 0.5vw;
+  height: 70px;
+  width: auto;
+  display: block;
+  margin-bottom: 8px;
+  margin-right: 8px;
   align-self: center;
+  display: flex;
 }
 
 .singleImage {
@@ -227,7 +235,7 @@ body {
   margin-right: 3px;
 } */
 
-.singleImageContainer {
+/* .singleImageContainer {
   position: relative;
   right: 0.5vw;
   height: 70px;
@@ -235,7 +243,8 @@ body {
   display: block;
   margin-bottom: 8px;
   align-self: center;
-}
+  display: flex;
+} */
 
 .singleImage {
   /* position: relative;
@@ -253,7 +262,7 @@ body {
   position: absolute;
   z-index: 200;
   bottom: 0;
-  right: 0;
+  right: 0.5vw;
   justify-content: center;
   align-items: center;
   width: 22px;
@@ -261,6 +270,10 @@ body {
   border-radius: 50%;
   background-color: rgba(184, 184, 184, .8);
   margin: 2px;
+}
+
+.plusContainer:hover {
+  box-shadow: 0 0 3pt 2pt cornflowerblue;
 }
 
 .plusIcon {
@@ -347,4 +360,16 @@ label {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+.loginPrompt {
+  position: absolute;
+  width: 200px;
+  left: 40px;
+  background-color: rgba(255, 0, 0, .5);
+  text-align: center;
+  font-size: 14px;
+  padding: 3px;
+  padding-right: 7px;
+  border-radius: 20px;
 }
