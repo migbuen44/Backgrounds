@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,9 +27,9 @@ const Image = ({
 
   return (
     <div className="singleImageContainer">
-      <img src={src} className="singleImage" onClick={handleImageClick}alt="" />
+      <img src={src} className="singleImage click" onClick={handleImageClick}alt="" />
       {(userLoggedIn && !savedImagesSelected) ? (
-        <div className="plusContainer" onClick={handleSaveClick}>
+        <div className="plusContainer click" onClick={handleSaveClick}>
           <FontAwesomeIcon icon={faPlus} className="plusIcon" style={{ color: 'black' }} />
         </div>
       ) : <></>}

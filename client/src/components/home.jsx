@@ -23,6 +23,7 @@ const Home = () => {
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
   const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
   const [searchTerm, setSearchTerm] = useState('cool');
+  const [displayLoginPrompt, setDisplayLoginPrompt] = useState(false);
 
   useEffect(() => {
     setLoggedIn(userLoggedIn);
@@ -37,6 +38,9 @@ const Home = () => {
   };
 
   const handleSavedClicked = () => {
+    if (!userLoggedIn) {
+      return;
+    }
     dispatch(selectSavedImages());
   };
 
@@ -44,9 +48,15 @@ const Home = () => {
     dispatch(selectSearchedImages());
   };
 
-  // if (!accessToken) {
-  //   return <></>;
-  // }
+  const handleSavedMouseEnter = () => {
+    if (!userLoggedIn) {
+      setDisplayLoginPrompt(true);
+    }
+  };
+
+  const handleSavedMouseLeave = () => {
+    setDisplayLoginPrompt(false);
+  };
 
   return (
     <>
@@ -54,41 +64,38 @@ const Home = () => {
       {
         accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
           : (
-            // <div className="songContainerHolder">
-            //   <div className="containerHolderMessage">Sign in to Spotify to see songs</div>
-            // </div>
             <SpotifyLoginButton />
           )
       }
-      {/* <SongContainer search={searchTerm} accessToken={accessToken} /> */}
       <Search setSearchTerm={setSearchTerm} />
-      {/* {
-        accessToken ? <></>
-          : <SpotifyLoginButton />
-      } */}
       {loggedIn
         ? (
-          <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+          <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
             <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
           </div>
         )
         : (
-        <div className="iconCircle loginContainer" onClick={handleLoginClick}>
+        <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
           <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
         </div>
         )}
       {savedImagesSelected
         ? (
-          <div className="iconCircle saveSelectContainer" onClick={handleSearchedClicked}>
+          <div className="iconCircle saveSelectContainer click" onClick={handleSearchedClicked}>
             <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
           </div>
         )
         : (
-          <div className="iconCircle saveSelectContainer" onClick={handleSavedClicked}>
+          <div
+            className="iconCircle saveSelectContainer click"
+            onMouseEnter={handleSavedMouseEnter}
+            onMouseLeave={handleSavedMouseLeave}
+            onClick={handleSavedClicked}>
             <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
+            {displayLoginPrompt ? <span className="loginPrompt">Login to view saved backgrounds</span>
+              : <></>}
           </div>
-        )
-      }
+        )}
       <LoginModal />
       {
         accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
@@ -98,7 +105,6 @@ const Home = () => {
             </div>
           )
       }
-      {/* <MusicPlayer className="musicPlayer" accessToken={accessToken} /> */}
     </>
   );
 };

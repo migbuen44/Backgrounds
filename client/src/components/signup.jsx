@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../slices/userLoginSlice';
+import { setUserInfo } from '../slices/userInfoSlice';
 import info from '../info';
+import { closeModal } from '../slices/loginModalSlice';
 
 const { url } = info;
 const { localStorage } = window;
 
-const SignUp = () => {
+const SignUp = ({ setDisplaySignUp }) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSignUpClick = () => {
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
     axios.post(`${url}/signup`, { name, password, email })
       .then((response) => {
-        console.log(response);
-        const jwt = response.data;
-        localStorage.setItem('jwt', jwt);
-        const localStorageTest = localStorage.getItem('jwt');
-        console.log('localStorageTest: ', localStorageTest);
+        const { user, token } = response.data;
+        localStorage.setItem('access_token', token);
+        dispatch(setUserInfo(user));
+        dispatch(loginUser());
+        dispatch(closeModal());
       })
       .catch((err) => {
         console.log(err);
@@ -37,27 +42,31 @@ const SignUp = () => {
     setEmail(e.target.value);
   };
 
+  const handleLoginClick = () => {
+    setDisplaySignUp(false);
+  };
+
   return (
     <>
-      <div>SignUp Page</div>
-      <form>
-        <div>
-          <label>Email: </label>
-          <input type="email" className="email" onChange={handleEmailChange} />
-        </div>
-        <div>
-          <label>Name: </label>
-          <input type="text" className="name" onChange={handleNameChange} />
-        </div>
-        <div>
-          <label>Password: </label>
-          <input type="password" className="password" onChange={handlePasswordChange} />
-        </div>
-        <button type="button" className="signUp" onClick={handleSignUpClick}>SignUp</button>
-        <button type="button" className="toLogin">
-          <Link to="/login">Login</Link>
-        </button>
-      </form>
+      <div className="userInfo">
+        <h2 className="header">SignUp</h2>
+        <form onSubmit={handleSignUpClick}>
+          <div>
+            <label>Email </label>
+            <input type="email" className="email" onChange={handleEmailChange} />
+          </div>
+          <div>
+            <label>Name </label>
+            <input type="text" className="name" onChange={handleNameChange} />
+          </div>
+          <div>
+            <label>Password </label>
+            <input type="password" className="password" onChange={handlePasswordChange} />
+          </div>
+          <button type="submit" className="signUp" onClick={handleSignUpClick}>SignUp</button>
+          <button type="button" className="toLogin" onClick={handleLoginClick}>Login</button>
+        </form>
+      </div>
     </>
   );
 };

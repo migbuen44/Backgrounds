@@ -8,6 +8,7 @@ import currentSongIdxReducer from './slices/currentSongIdxSlice';
 import searchedImagesReducer from './slices/searchedImagesSlice';
 import savedImagesReducer from './slices/savedImagesSlice';
 import savedImagesSelectedReducer from './slices/savedImagesSelectedSlice';
+import autoPlayReducer from './slices/autoPlaySlice';
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     searchedImages: searchedImagesReducer,
     savedImages: savedImagesReducer,
     savedImagesSelected: savedImagesSelectedReducer,
+    autoPlay: autoPlayReducer,
   },
 });

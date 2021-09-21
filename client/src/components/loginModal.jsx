@@ -32,7 +32,6 @@ const LoginModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    console.log('modal is open');
     setIsOpen(modalIsOpen);
   }, [modalIsOpen]);
 
@@ -46,8 +45,8 @@ const LoginModal = () => {
 
   return ReactDom.createPortal(
     <div style={OVERLAY_STYLES}>
-      <div style={MODAL_STYLES}>
-        <span style={{ float: 'right' }} onClick={handleCloseClick}>X</span>
+      <div className="modal" style={MODAL_STYLES}>
+        <span className="closeModal click" style={{ float: 'right' }} onClick={handleCloseClick}>X</span>
         <Login />
       </div>
     </div>,

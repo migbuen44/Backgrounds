@@ -16,8 +16,6 @@ const style = {
 };
 
 const ImageContainer = ({ search }) => {
-  console.log('imagecontainer');
-  console.log('search: ', search);
   const dispatch = useDispatch();
   const savedImagesSelected = useSelector((state) => state.savedImagesSelected.value);
   const savedImages = useSelector((state) => state.savedImages.value);
@@ -37,7 +35,6 @@ const ImageContainer = ({ search }) => {
   }, [savedImagesSelected]);
 
   let imageIdx = 0;
-  console.log('currentImageIdx: ', currentImageIdx);
   const { pexelsAuth } = info;
 
   const changeImg = (idx) => {
@@ -45,7 +42,6 @@ const ImageContainer = ({ search }) => {
   };
 
   const cycleImg = () => {
-    console.log('imageIdx: ', imageIdx);
     if (!backgrounds.length) {
       return;
     }
@@ -60,7 +56,6 @@ const ImageContainer = ({ search }) => {
   };
 
   const playImages = () => {
-    console.log('playImages()');
     if (currentInterval) {
       clearInterval(currentInterval);
     }
@@ -87,11 +82,8 @@ const ImageContainer = ({ search }) => {
     axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
       .then((data) => {
         const { photos } = data.data;
-        console.log('photos: ', photos);
         const formattedPhotos = photos.map((photo) => photo.src.landscape);
-        // setBackgrounds(photos);
         setBackgrounds(formattedPhotos);
-        // dispatch(updateSearchedImages(photos));
         dispatch(updateSearchedImages(formattedPhotos));
       });
   }, [search]);
@@ -106,8 +98,6 @@ const ImageContainer = ({ search }) => {
     if (!search) return;
 
     setCurrentImageIdx(imageClickedIdx);
-    console.log('imageIdx before ChangeImg(): ', imageIdx);
-    console.log('imageClickedIdx: ', imageClickedIdx);
     changeImg(imageClickedIdx);
     pauseImages();
     setImagePaused(true);

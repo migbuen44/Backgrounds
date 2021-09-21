@@ -44,7 +44,7 @@
 
 //****************** */
 /* eslint-disable react/prop-types */
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCurrentSong } from '../slices/currentSongSlice';
 
@@ -82,7 +82,7 @@ const SongTile = ({ song }) => {
   return (
     <div className="songTile">
       <div className="songName">{songName}</div>
-      <img className="albumImage" src={albumImageUrl} alt="" onClick={onTileImageClick} />
+      <img className="albumImage click" src={albumImageUrl} alt="" onClick={onTileImageClick} />
     </div>
   );
 };

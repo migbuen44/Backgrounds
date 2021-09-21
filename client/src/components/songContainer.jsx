@@ -11,11 +11,10 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 const SongContainer = ({ accessToken, search }) => {
-  console.log('playlistContainer');
   const dispatch = useDispatch();
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
 
-  useEffect(() => { // check if this use effect is even needed
+  useEffect(() => {
     if (!accessToken) {
       return;
     }
@@ -26,23 +25,16 @@ const SongContainer = ({ accessToken, search }) => {
     if (search === '') {
       return;
     }
-    spotifyApi.searchPlaylists(search, { limit: 1, offset: 1 }) // use async await here
+    spotifyApi.searchPlaylists(search, { limit: 1, offset: 1 })
       .then((res) => {
-        console.log('res.body: ', res.body);
         const { uri } = res.body.playlists.items[0];
-        console.log('uri: ', uri);
-        // dispatch(updateCurrentSong(uri));
-
         const uriCode = uri.slice(17);
-        console.log('uriCode: ', uriCode);
 
         spotifyApi.getPlaylist(uriCode)
           .then((res) => {
-            console.log('getPlaylist res.body: ', res.body);
             const playlist = res.body.tracks.items;
             const firstSong = playlist[0].track.uri;
             dispatch(updateCurrentSong(firstSong));
-            console.log('playlist: ', playlist);
             setCurrentPlaylist(playlist);
           });
       });

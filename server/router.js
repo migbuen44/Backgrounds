@@ -10,7 +10,6 @@ router.post('/signup', (req, res) => {
   const { name, password, email } = req.body;
 
   bcrypt.hash(password, 10, (error, hash) => {
-    // console.log('hashed password: ', hash);
     if (error) return res.sendStatus(500);
 
     const user = {
@@ -39,7 +38,7 @@ router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   db.getUser(email, (dbErr, dbResult) => {
-    if (dbErr) return res.sendStatus(404);
+    if (dbErr || !dbResult.rows.length) return res.sendStatus(404);
 
     const userInfo = dbResult.rows[0];
     const hashedPassword = userInfo.password;
@@ -66,21 +65,15 @@ router.post('/images', (req, res) => {
   jwt.verify(token, secret, (err, user) => {
     if (err) return res.sendStatus(401);
     const { id } = user;
-    // console.log('authorized user');
-    // console.log('user: ', user);
-    console.log('user: ', user);
-    console.log('photoUrl: ', photoUrl);
     db.addUrl({ userId: id, photoUrl }, (dbErr) => {
       if (dbErr) return res.sendStatus(400);
 
       res.sendStatus(200);
     });
-    // res.sendStatus(200);
   });
 });
 
 router.get('/images/:token', (req, res) => {
-  // const { userId } = req.query;
   const { token } = req.params;
 
   jwt.verify(token, secret, (err, user) => {
@@ -90,15 +83,7 @@ router.get('/images/:token', (req, res) => {
       if (err) return res.sendStatus(404);
       res.send(result);
     });
-    // res.sendStatus(200);
   });
-
-  // use db function to retrieve data from database
-  // db.getUrls(userId, (err, result) => {
-  //   if (err) return res.sendStatus(404);
-
-  //   res.send(result);
-  // });
 });
 
 router.post('/spotifyLogin', (req, res) => {
