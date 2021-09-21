@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useAuth = (code) => {
-  console.log('useAuth called');
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
@@ -20,7 +19,6 @@ const useAuth = (code) => {
       .catch((err) => {
         console.log(err);
         setAccessToken(null);
-        // window.location = '/';
       });
   }, [code]);
 

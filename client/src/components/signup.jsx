@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { loginUser } from '../slices/userLoginSlice';
 import { setUserInfo } from '../slices/userInfoSlice';
 import info from '../info';
@@ -20,11 +19,8 @@ const SignUp = ({ setDisplaySignUp }) => {
     e.preventDefault();
     axios.post(`${url}/signup`, { name, password, email })
       .then((response) => {
-        console.log(response.data);
         const { user, token } = response.data;
         localStorage.setItem('access_token', token);
-        const localStorageTest = localStorage.getItem('access_token');
-        console.log('localStorageTest: ', localStorageTest);
         dispatch(setUserInfo(user));
         dispatch(loginUser());
         dispatch(closeModal());

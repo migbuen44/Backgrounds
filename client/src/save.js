@@ -7,7 +7,6 @@ const save = (photoUrl) => {
   const token = localStorage.getItem('access_token');
   axios.post(`${url}/images`, { token, photoUrl })
     .then(() => {
-      console.log('success');
     })
     .catch((err) => {
       console.log(err);

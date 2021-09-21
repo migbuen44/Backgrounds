@@ -48,21 +48,14 @@ const Home = () => {
   };
 
   const handleSavedMouseEnter = () => {
-    console.log('enter');
-    if(!userLoggedIn) {
+    if (!userLoggedIn) {
       setDisplayLoginPrompt(true);
     }
   };
 
   const handleSavedMouseLeave = () => {
-    console.log('leave');
     setDisplayLoginPrompt(false);
   };
-
-  // if (!accessToken) {
-  //   return <></>;
-  // }
-  console.log('access Token before home return: ', accessToken);
 
   return (
     <>
@@ -70,18 +63,10 @@ const Home = () => {
       {
         accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
           : (
-            // <div className="songContainerHolder">
-            //   <div className="containerHolderMessage">Sign in to Spotify to see songs</div>
-            // </div>
             <SpotifyLoginButton />
           )
       }
-      {/* <SongContainer search={searchTerm} accessToken={accessToken} /> */}
       <Search setSearchTerm={setSearchTerm} />
-      {/* {
-        accessToken ? <></>
-          : <SpotifyLoginButton />
-      } */}
       {loggedIn
         ? (
           <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
@@ -109,8 +94,7 @@ const Home = () => {
             {displayLoginPrompt ? <span className="loginPrompt">Login to view saved backgrounds</span>
               : <></>}
           </div>
-        )
-      }
+        )}
       <LoginModal />
       {
         accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
