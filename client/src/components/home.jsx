@@ -22,7 +22,7 @@ const Home = () => {
   const userSelectedSavedImages = useSelector((state) => state.savedImagesSelected.value);
   const [loggedIn, setLoggedIn] = useState(userLoggedIn);
   const [savedImagesSelected, setSavedImagesSelected] = useState(userSelectedSavedImages);
-  const [searchTerm, setSearchTerm] = useState('cool');
+  const [searchTerm, setSearchTerm] = useState('low fi');
   const [displayLoginPrompt, setDisplayLoginPrompt] = useState(false);
 
   useEffect(() => {
