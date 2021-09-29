@@ -35,6 +35,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  console.log('req body: ', req.body);
   const { email, password } = req.body;
 
   db.getUser(email, (dbErr, dbResult) => {
@@ -89,6 +90,7 @@ router.get('/images/:token', (req, res) => {
 router.post('/spotifyLogin', (req, res) => {
   const { code } = req.body;
   const spotifyApi = new SpotifyWebApi(config.spotifyWebAPIconfig);
+  console.log('code:', code);
 
   spotifyApi.authorizationCodeGrant(code)
     .then((data) => {

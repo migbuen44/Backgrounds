@@ -1,4 +1,5 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const SRC_DIR = path.join(__dirname, 'client/src');
 const DIST_DIR = path.join(__dirname, 'client/dist');
@@ -9,8 +10,12 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR,
   },
-  mode: 'development',
+  mode: 'production',
   watch: true,
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   devServer: {
     // static: './client/dist',
     port: 3000,

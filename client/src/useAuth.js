@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import info from './info';
+
+const { url } = info;
 
 const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState(null);
@@ -7,11 +10,10 @@ const useAuth = (code) => {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    axios.post('http://localhost:4000/spotifyLogin', {
+    axios.post(`${url}/spotifyLogin`, {
       code,
     })
       .then((res) => {
-        console.log('access Token: ', res.data.accessToken);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);

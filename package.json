@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
+    "build": "webpack --mode production",
     "dev-build": "webpack --mode development",
     "webpack-server": "webpack serve --open"
   },
@@ -42,6 +43,7 @@
     "react-spotify-web-playback": "^0.8.1",
     "redux": "^4.1.1",
     "spotify-web-api-node": "^5.0.2",
+    "terser-webpack-plugin": "^5.2.4",
     "underscore": "^1.13.1"
   },
   "devDependencies": {
