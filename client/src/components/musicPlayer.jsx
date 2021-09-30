@@ -20,12 +20,10 @@ const MusicPlayer = ({ accessToken }) => {
     <div className='player'>
       <SpotifyPlayer
         token={accessToken}
-        callback={(state) => { console.log(state); }}
         showSaveIcon
         autoPlay={autoPlay}
         play={autoPlay}
         uris={trackUri ? [trackUri] : []}
-        offset={0}
       />
     </div>
   );

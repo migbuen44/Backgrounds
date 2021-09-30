@@ -48,10 +48,12 @@ const ImageContainer = ({ search }) => {
 
     changeImg(imageIdx);
 
-    if (currentImage < backgrounds.length - 1) {
-      currentImage += 1;
+    if (imageIdx < backgrounds.length - 1) {
+      imageIdx += 1;
+      setCurrentImageIdx((prev) => prev + 1);
     } else {
-      currentImage = 0;
+      imageIdx = 0;
+      setCurrentImageIdx(0);
     }
   };
 
@@ -63,6 +65,12 @@ const ImageContainer = ({ search }) => {
       cycleImg.bind(imageIdx, currentImageIdx, setCurrentImageIdx), 3000,
     );
     setCurrentInterval(slideShowTimer);
+  };
+
+  const pauseImages = () => {
+    if (currentInterval) {
+      clearInterval(currentInterval);
+    }
   };
 
   const toggle = () => {
