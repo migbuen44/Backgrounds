@@ -40,6 +40,7 @@ body {
 .singleImage {
   position: relative;
   align-self: center;
+  left: 0.3vw;
   height: 70px;
   z-index: 100;
 }
@@ -150,10 +151,12 @@ body {
   right: 0;
   width: 180px;
   height: 90vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  margin-right: 0.3vw
 }
 
 .songContainerHolder {
@@ -216,6 +219,7 @@ body {
   align-self: center;
   display: flex;
   justify-content: center;
+  padding-left: 4px
 }
 
 .albumImage {
@@ -261,7 +265,7 @@ body {
   position: absolute;
   z-index: 200;
   bottom: 0;
-  right: 0.5vw;
+  right: -0.3vw;
   justify-content: center;
   align-items: center;
   width: 22px;
@@ -387,3 +391,29 @@ label {
 .click {
   cursor: pointer;
 }
+
+.scroll::-webkit-scrollbar {
+  min-width: 6px;
+  width: 0.7vw;
+  max-width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* .scroll::-webkit-scrollbar-thumb:active {
+  border-radius: 10px;
+  background: rgba(68, 68, 68);
+} */

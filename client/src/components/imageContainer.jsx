@@ -114,7 +114,7 @@ const ImageContainer = ({ search }) => {
   return (
     <>
       <div onClick={toggle} className="toggle" />
-      <div className="imageContainer">
+      <div className="imageContainer scroll">
         {backgrounds.map((background, idx) =>
           <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}
       </div>

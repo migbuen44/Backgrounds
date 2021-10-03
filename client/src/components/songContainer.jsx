@@ -41,7 +41,7 @@ const SongContainer = ({ accessToken, search }) => {
   }, [search]);
 
   return (
-    <div className="songContainer">
+    <div className="songContainer scroll">
       {currentPlaylist.map((song, idx) =>
         <SongTile song={song} playlistIdx={idx} key={idx} />)}
     </div>
