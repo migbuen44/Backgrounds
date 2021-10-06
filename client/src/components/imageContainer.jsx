@@ -87,7 +87,7 @@ const ImageContainer = ({ search }) => {
   useEffect(() => {
     if (search === '' || search === undefined) return;
 
-    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
+    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70&orientation=landscape`, pexelsAuth)
       .then((data) => {
         const { photos } = data.data;
         const formattedPhotos = photos.map((photo) => photo.src.landscape);
