@@ -5,9 +5,9 @@ import { faUser, faUserSlash, faBookmark, faSearch } from '@fortawesome/free-sol
 import { openModal } from '../slices/loginModalSlice';
 import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
-import LoginModal from './loginModal';
-import SongContainer from './songContainer';
-import ImageContainer from './imageContainer';
+import LoginModal from './login/loginModal';
+import SongContainer from './songs/songContainer';
+import ImageContainer from './images/imageContainer';
 import Search from './search';
 import useAuth from '../useAuth';
 import SpotifyLoginButton from './spotifyLogin';

@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import SpotifyWebApi from 'spotify-web-api-node';
-import info from '../info';
-import { updateCurrentSong } from '../slices/currentSongSlice';
+import info from '../../info';
+import { updateCurrentSong } from '../../slices/currentSongSlice';
 import SongTile from './songTile';
 
 const spotifyApi = new SpotifyWebApi({

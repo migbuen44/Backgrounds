@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../slices/userLoginSlice';
-import { setUserInfo } from '../slices/userInfoSlice';
-import { updateSavedImages } from '../slices/savedImagesSlice';
-import info from '../info';
+import { loginUser } from '../../slices/userLoginSlice';
+import { setUserInfo } from '../../slices/userInfoSlice';
+import { updateSavedImages } from '../../slices/savedImagesSlice';
+import info from '../../info';
 import SignUp from './signup';
-import { closeModal } from '../slices/loginModalSlice';
+import { closeModal } from '../../slices/loginModalSlice';
 
 const { url } = info;
 const { localStorage } = window;

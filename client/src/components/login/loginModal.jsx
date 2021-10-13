@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Login from './login';
-import { closeModal } from '../slices/loginModalSlice';
+import { closeModal } from '../../slices/loginModalSlice';
 
 const OVERLAY_STYLES = {
   position: 'fixed',

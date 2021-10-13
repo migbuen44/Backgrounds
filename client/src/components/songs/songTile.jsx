@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCurrentSong } from '../slices/currentSongSlice';
+import { updateCurrentSong } from '../../slices/currentSongSlice';
 
 const SongTile = ({ song }) => {
   const dispatch = useDispatch();

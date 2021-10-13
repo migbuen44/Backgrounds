@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../slices/userLoginSlice';
-import { setUserInfo } from '../slices/userInfoSlice';
-import info from '../info';
-import { closeModal } from '../slices/loginModalSlice';
+import { loginUser } from '../../slices/userLoginSlice';
+import { setUserInfo } from '../../slices/userInfoSlice';
+import info from '../../info';
+import { closeModal } from '../../slices/loginModalSlice';
 
 const { url } = info;
 const { localStorage } = window;

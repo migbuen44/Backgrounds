@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import info from '../info';
+import info from '../../info';
 import Image from './image';
-import { updateSearchedImages } from '../slices/searchedImagesSlice';
+import { updateSearchedImages } from '../../slices/searchedImagesSlice';
 
 const style = {
   position: 'relative',
