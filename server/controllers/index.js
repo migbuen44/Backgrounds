@@ -59,28 +59,22 @@ const controller = {
     });
   },
   addUrl: (req, res) => {
-    const { token, photoUrl } = req.body;
+    const { photoUrl } = req.body;
+    const { user } = req;
+    const { id } = user;
 
-    jwt.verify(token, secret, (err, user) => {
-      if (err) return res.sendStatus(401);
-      const { id } = user;
-      db.addUrl({ userId: id, photoUrl }, (dbErr) => {
-        if (dbErr) return res.sendStatus(400);
+    db.addUrl({ userId: id, photoUrl }, (dbErr) => {
+      if (dbErr) return res.sendStatus(400);
 
-        res.sendStatus(200);
-      });
+      res.sendStatus(200);
     });
   },
   getUrls: (req, res) => {
-    const { token } = req.params;
-
-    jwt.verify(token, secret, (err, user) => {
-      if (err) return res.sendStatus(401);
-      const { id } = user;
-      db.getUrls(id, (err, result) => {
-        if (err) return res.sendStatus(404);
-        res.send(result);
-      });
+    const { user } = req;
+    const { id } = user;
+    db.getUrls(id, (err, result) => {
+      if (err) return res.sendStatus(404);
+      res.send(result);
     });
   },
   getSpotifyCode: (req, res) => {
