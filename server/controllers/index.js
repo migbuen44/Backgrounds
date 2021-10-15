@@ -12,20 +12,20 @@ const controller = {
     bcrypt.hash(password, 10, (error, hash) => {
       if (error) return res.sendStatus(500);
 
-      const user = {
+      const userInput = {
         name,
         email,
         password: hash,
       };
 
-      db.addUser(user, (dbErr, dbResult) => {
+      db.addUser(userInput, (dbErr, dbResult) => {
         if (dbErr) return res.sendStatus(400);
 
         const userInfo = dbResult.rows[0];
         const { id, name, email } = userInfo;
-        const userSign = { id, name, email };
+        const user = { id, name, email };
 
-        jwt.sign(userSign, secret, (jwtErr, token) => {
+        jwt.sign(user, secret, (jwtErr, token) => {
           if (jwtErr) return res.sendStatus(500);
 
           res.send({ user, token });

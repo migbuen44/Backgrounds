@@ -2,9 +2,7 @@ const pool = require('../../database/index');
 
 const db = {
   addUser: ({ name, email, password }, callback) => {
-    const queryString = `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${password}') RETURNING *`;
-
-    console.log(queryString);
+    const queryString = `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${password}') RETURNING id, name, email`;
 
     pool.query(queryString, (err, result) => {
       if (err) {
