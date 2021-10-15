@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const SpotifyWebApi = require('spotify-web-api-node');
 const secret = require('../secret');
-const db = require('../models/index');
+const db = require('../dbHelpers/index');
 const config = require('../config');
 
 const controller = {

@@ -1,16 +1,14 @@
-const db = require('../../server/models/index');
+const db = require('../../server/dbHelpers/index');
 const pool = require('../../database/index');
 
 let testUserId;
 const testUrl = 'https://test.com';
 
 beforeAll(() => {
-  afterAll(() => {
-    const deleteUrlQueryString = `DELETE FROM image_urls WHERE url = '${testUrl}'`;
-    pool.query(deleteUrlQueryString);
-    const deleteUserQueryString = "DELETE FROM users WHERE name='test'";
-    pool.query(deleteUserQueryString);
-  });
+  const deleteUrlQueryString = `DELETE FROM image_urls WHERE url = '${testUrl}'`;
+  pool.query(deleteUrlQueryString);
+  const deleteUserQueryString = "DELETE FROM users WHERE name='test'";
+  pool.query(deleteUserQueryString);
 });
 
 afterAll(() => {
@@ -20,7 +18,7 @@ afterAll(() => {
   pool.query(deleteUserQueryString);
 });
 
-describe('models', () => {
+describe('dbHelpers', () => {
   test('addUser calls callback function with user info', (done) => {
     const testData = {
       name: 'test',
