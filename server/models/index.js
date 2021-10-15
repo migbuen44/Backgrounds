@@ -14,7 +14,6 @@ const db = {
     });
   },
   getUser: (email, callback) => {
-    console.log('email: ', email);
     const queryString = `SELECT * FROM users WHERE email = '${email}'`;
 
     pool.query(queryString, (err, result) => {
