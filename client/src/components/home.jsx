@@ -33,6 +33,7 @@ const Home = () => {
   }, [userSelectedSavedImages]);
 
   const handleLoginClick = () => {
+    if (userLoggedIn) return;
     dispatch(openModal());
   };
 
