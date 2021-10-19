@@ -13,6 +13,13 @@ export const userInfoSlice = createSlice({
     setUserInfo: (state, action) => {
       state.value = action.payload;
     },
+    setUserLogout: () => {
+      state.value = {
+        id: null,
+        name: null,
+        email: null,
+      };
+    },
   },
 });
 

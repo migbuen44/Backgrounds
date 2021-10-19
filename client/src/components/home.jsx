@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { openModal } from '../slices/loginModalSlice';
+import { faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
 import LoginModal from './login/loginModal';
@@ -11,6 +10,8 @@ import ImageContainer from './images/imageContainer';
 import Search from './search';
 import useAuth from '../useAuth';
 import SpotifyLoginButton from './spotifyLogin';
+import LoginIcon from './icons_and_holders/loginIcon';
+import LogoutIcon from './icons_and_holders/logoutIcon';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -31,11 +32,6 @@ const Home = () => {
   useEffect(() => {
     setSavedImagesSelected(userSelectedSavedImages);
   }, [userSelectedSavedImages]);
-
-  const handleLoginClick = () => {
-    if (userLoggedIn) return;
-    dispatch(openModal());
-  };
 
   const handleSavedClicked = () => {
     if (!userLoggedIn) {
@@ -63,22 +59,10 @@ const Home = () => {
       <ImageContainer search={searchTerm} />
       {
         accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
-          : (
-            <SpotifyLoginButton />
-          )
+          : <SpotifyLoginButton />
       }
       <Search setSearchTerm={setSearchTerm} />
-      {loggedIn
-        ? (
-          <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
-            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
-          </div>
-        )
-        : (
-        <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
-          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
-        </div>
-        )}
+      {loggedIn ? <LogoutIcon /> : <LoginIcon />}
       {savedImagesSelected
         ? (
           <div className="iconCircle saveSelectContainer click" onClick={handleSearchedClicked}>
