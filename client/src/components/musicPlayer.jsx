@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
+import styles from './musicPlayer.module.css';
 
 const MusicPlayer = ({ accessToken }) => {
   const currentSong = useSelector((state) => state.currentSong.value);
@@ -17,7 +18,7 @@ const MusicPlayer = ({ accessToken }) => {
   }
 
   return (
-    <div className='player'>
+    <div className={styles.player}>
       <SpotifyPlayer
         token={accessToken}
         showSaveIcon

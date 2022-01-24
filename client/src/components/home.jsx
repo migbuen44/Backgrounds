@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
 import LoginModal from './login/loginModal';
@@ -12,6 +12,7 @@ import useAuth from '../useAuth';
 import SpotifyLoginButton from './spotifyLogin';
 import LoginIcon from './icons_and_holders/loginIcon';
 import LogoutIcon from './icons_and_holders/logoutIcon';
+import styles from './home.module.css';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -63,29 +64,27 @@ const Home = () => {
       }
       <Search setSearchTerm={setSearchTerm} />
       {loggedIn ? <LogoutIcon /> : <LoginIcon />}
-      {savedImagesSelected
-        ? (
-          <div className="iconCircle saveSelectContainer click" onClick={handleSearchedClicked}>
-            <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
+      {savedImagesSelected ? (
+          <div className={`${styles.saveSelectContainer} iconCircle click`} onClick={handleSearchedClicked}>
+            <FontAwesomeIcon className={styles.savedButton} style={{ color: 'black' }} icon={faSearch} />
           </div>
-        )
-        : (
+        ) : (
           <div
-            className="iconCircle saveSelectContainer click"
+            className={`${styles.saveSelectContainer} iconCircle click`}
             onMouseEnter={handleSavedMouseEnter}
             onMouseLeave={handleSavedMouseLeave}
             onClick={handleSavedClicked}>
-            <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
-            {displayLoginPrompt ? <span className="loginPrompt">Login to view saved backgrounds</span>
+            <FontAwesomeIcon className={styles.searchedButton} style={{ color: 'black' }} icon={faBookmark} />
+            {displayLoginPrompt ? <span className={styles.loginPrompt}>Login to view saved backgrounds</span>
               : <></>}
           </div>
         )}
       <LoginModal />
       {
-        accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
+        accessToken ? <MusicPlayer accessToken={accessToken} />
           : (
-            <div className="musicPlayerHolder">
-              <div className="playerHolderMessage">Sign in to Spotify to play songs</div>
+            <div className={styles.musicPlayerHolder}>
+              <div className={styles.playerHolderMessage}>Sign in to Spotify to play songs</div>
             </div>
           )
       }

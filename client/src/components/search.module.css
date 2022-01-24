@@ -1,0 +1,32 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  font-size: large;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+  background:rgba(255, 255, 255, .6);
+  /* opacity: 0.6; */
+  z-index: 60;
+}
+
+.searchBar {
+  width: 20vh;
+  height: 3vh;
+  border: 0;
+  background: transparent;
+}
+
+.searchBar:focus {
+  outline: none;
+}
+
+.searchIcon {
+  margin: 5px;
+}

@@ -1,0 +1,9 @@
+.loginButton {
+  position: relative;
+  align-self: center;
+  font-size: 17px;
+}
+
+.loginContainer {
+  right: 180px;
+}

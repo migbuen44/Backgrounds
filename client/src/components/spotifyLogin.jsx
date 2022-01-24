@@ -1,10 +1,11 @@
 import React from 'react';
-import info from '../info';
+import config from '../config';
+import styles from './spotifyLogin.module.css';
 
 const SpotifyLogin = () => {
-  const { AUTH_URL } = info;
+  const { AUTH_URL } = config;
   return (
-    <a className="spotifyLoginButton" href={AUTH_URL}>
+    <a className={styles.spotifyLoginButton} href={AUTH_URL}>
       Spotify Login
     </a>
   );

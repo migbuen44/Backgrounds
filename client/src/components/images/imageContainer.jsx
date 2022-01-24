@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import info from '../../info';
+import config from '../../config';
 import Image from './image';
 import { updateSearchedImages } from '../../slices/searchedImagesSlice';
+import styles from './images.module.css';
 
 const style = {
   position: 'relative',
@@ -35,7 +36,7 @@ const ImageContainer = ({ search }) => {
   }, [savedImagesSelected]);
 
   let imageIdx = 0;
-  const { pexelsAuth } = info;
+  const { pexelsAuth } = config;
 
   const changeImg = (idx) => {
     document.body.style.backgroundImage = `url(${backgrounds[idx]})`;
@@ -113,8 +114,8 @@ const ImageContainer = ({ search }) => {
 
   return (
     <>
-      <div onClick={toggle} className="toggle" />
-      <div className="imageContainer scroll">
+      <div onClick={toggle} className={styles.toggle} />
+      <div className={`${styles.imageContainer} scroll`}>
         {backgrounds.map((background, idx) =>
           <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}
       </div>

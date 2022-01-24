@@ -1,7 +1,7 @@
 import axios from 'axios';
-import info from './info';
+import config from './config';
 
-const { url } = info;
+const { url } = config;
 
 const save = (photoUrl) => {
   const token = localStorage.getItem('access_token');

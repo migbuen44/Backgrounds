@@ -5,6 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import save from '../../save';
 import { addToSavedImages } from '../../slices/savedImagesSlice';
+import styles from './images.module.css';
 
 const Image = ({
   background,
@@ -26,11 +27,11 @@ const Image = ({
   };
 
   return (
-    <div className="singleImageContainer">
-      <img src={src} className="singleImage click" onClick={handleImageClick}alt="" />
+    <div className={styles.singleImageContainer}>
+      <img src={src} className={`${styles.singleImage} click`} onClick={handleImageClick}alt="" />
       {(userLoggedIn && !savedImagesSelected) ? (
-        <div className="plusContainer click" onClick={handleSaveClick}>
-          <FontAwesomeIcon icon={faPlus} className="plusIcon" style={{ color: 'black' }} />
+        <div className={`${styles.plusContainer} click`} onClick={handleSaveClick}>
+          <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} style={{ color: 'black' }} />
         </div>
       ) : <></>}
     </div>

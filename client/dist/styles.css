@@ -4,27 +4,6 @@ body {
   font-family: Roboto;
 }
 
-.player {
-  position: absolute;
-  width: 99%;
-  bottom: 0;
-  z-index: 300;
-}
-
-.imageContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 180px;
-  height: 90vh;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  /* align-content: center; */
-  /* justify-content: center; */
-  margin-top: 10px;
-}
-
 .singleImageContainer {
   position: relative;
   right: 0.5vw;
@@ -45,75 +24,11 @@ body {
   z-index: 100;
 }
 
-/* .songContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 180px;
-  height: 90vh;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  margin-top: 10px;
-} */
-
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
-  font-size: large;
-}
-
-.searchContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* border: 1px solid black; */
-  background:rgba(255, 255, 255, .6);
-  /* opacity: 0.6; */
-  z-index: 60;
-}
-
-.searchBar {
-  width: 20vh;
-  height: 3vh;
-  border: 0;
-  background: transparent;
-}
-
-.searchBar:focus {
-  outline: none;
-}
-
-.searchIcon {
-  margin: 5px;
-}
-
 .spotifylogin {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  /*  */
-}
-
-.spotifyLoginButton {
-  display: flex;
-  width: 100px;
-  height: 18px;
-  background: #1DB954;
-  padding: 10px;
-  text-align: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  position: absolute;
-  top: 0;
-  right: 25px;
-  margin: 10px;
 }
 
 .loginButton, .userButton {
@@ -130,7 +45,6 @@ body {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  /* opacity: 0.3; */
   z-index: 500;
   justify-content: center;
   align-items: center;
@@ -141,123 +55,9 @@ body {
   right: 180px;
 }
 
-.saveSelectContainer {
-  left: 180px;
-}
-
-.songContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 180px;
-  height: 90vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  margin-right: 0.3vw
-}
-
-.songContainerHolder {
-  position: absolute;
-  top: 0;
-  right: 0.5vw;
-  width: 180px;
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  background-color: rgba(255, 255, 255, .6);
-}
-
 .containerHolderMessage {
   text-align: center;
   width: 110px;
-}
-
-.musicPlayerHolder {
-  position: absolute;
-  width: 99%;
-  height: 8vh;
-  bottom: 0;
-  z-index: 300;
-  background-color: rgba(255, 0, 0, .5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.playerHolderMessage {
-  text-align: center;
-}
-
-.songTile {
-  background-position: left;
-  background-size: 50px;
-  background-color: rgba(0, 0, 0, .5);
-  height: 70px;
-  width: 170px;
-  position: relative;
-  right: 0.5vw;
-  margin-right: 7px;
-  margin-bottom: 7px;
-  color: white;
-  font-size: 14px;
-  margin-right: 3px;
-  display: flex;
-  /* flex-direction: row; */
-  align-content: center;
-  justify-content: end;
-}
-
-.songName {
-  text-align: right;
-  margin: 5px;
-  margin-left: 0.5vw;
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  padding-left: 4px
-}
-
-.albumImage {
-  /* position: relative; */
-  /* right: 0.5vw; */
-  /* float: right; */
-  height: 60px;
-  display: block;
-  /* margin-right: 7px; */
-  margin-left: 7px;
-  /* align-self: center; */
-};
-
-/* .songName {
-  font-size: 14px;
-  margin-right: 3px;
-} */
-
-/* .singleImageContainer {
-  position: relative;
-  right: 0.5vw;
-  height: 70px;
-  width: auto;
-  display: block;
-  margin-bottom: 8px;
-  align-self: center;
-  display: flex;
-} */
-
-.singleImage {
-  /* position: relative;
-  right: 0.5vw;
-  height: 70px;
-  display: block;
-  margin-bottom: 8px;
-  align-self: center; */
-  /* height: 70px;
-  z-index: 100; */
 }
 
 .plusContainer {
@@ -280,101 +80,16 @@ body {
 }
 
 .plusIcon {
-  /* align-self: center; */
   color: white;
-}
-
-.toggle {
-  position: absolute;
-  top: 10vh;
-  bottom: 10vh;
-  left: 180px;
-  right: 180px;
-  z-index: 50;
 }
 
 .musicPlayer {
   z-index: 60;
 }
 
-.modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.closeModal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.email, .name, .password {
-  margin: 10px;
-}
-
-.toSignUp, .toLogin {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-}
-
-.signUp, .submitLogin {
-  float: right;
-}
-
 label {
   display: block;
   font-size: 14px;
-}
-
-.header {
-  position: absolute;
-  top: 40px;
-}
-
-.signUp, .toLogin, .submitLogin, .toSignUp {
-  background-color: rgba(51, 51, 51, .3);
-  border-radius: 8px;
-  border-width: 0;
-  color: #333333;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 10px 12px;
-  text-align: center;
-  transition: all 200ms;
-  vertical-align: baseline;
-  white-space: nowrap;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.loginPrompt {
-  position: absolute;
-  width: 200px;
-  left: 40px;
-  background-color: rgba(255, 0, 0, .5);
-  text-align: center;
-  font-size: 14px;
-  padding: 3px;
-  padding-right: 7px;
-  border-radius: 20px;
 }
 
 .invalidLogin {

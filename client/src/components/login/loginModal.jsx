@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Login from './login';
 import { closeModal } from '../../slices/loginModalSlice';
+import styles from './login.module.css';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -45,8 +46,8 @@ const LoginModal = () => {
 
   return ReactDom.createPortal(
     <div style={OVERLAY_STYLES}>
-      <div className="modal" style={MODAL_STYLES}>
-        <span className="closeModal click" style={{ float: 'right' }} onClick={handleCloseClick}>X</span>
+      <div className={styles.modal} style={MODAL_STYLES}>
+        <span className={`${styles.closeModal} click`} style={{ float: 'right' }} onClick={handleCloseClick}>X</span>
         <Login />
       </div>
     </div>,
