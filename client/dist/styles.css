@@ -4,39 +4,6 @@ body {
   font-family: Roboto;
 }
 
-.singleImageContainer {
-  position: relative;
-  right: 0.5vw;
-  height: 70px;
-  width: auto;
-  display: block;
-  margin-bottom: 8px;
-  margin-right: 8px;
-  align-self: center;
-  display: flex;
-}
-
-.singleImage {
-  position: relative;
-  align-self: center;
-  left: 0.3vw;
-  height: 70px;
-  z-index: 100;
-}
-
-.spotifylogin {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
-}
-
-.loginButton, .userButton {
-  position: relative;
-  align-self: center;
-  font-size: 17px;
-}
-
 .iconCircle {
   display: flex;
   position: absolute;
@@ -51,38 +18,6 @@ body {
   margin: 10px;
 }
 
-.loginContainer {
-  right: 180px;
-}
-
-.containerHolderMessage {
-  text-align: center;
-  width: 110px;
-}
-
-.plusContainer {
-  display: flex;
-  position: absolute;
-  z-index: 200;
-  bottom: 0;
-  right: -0.3vw;
-  justify-content: center;
-  align-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: rgba(184, 184, 184, .8);
-  margin: 2px;
-}
-
-.plusContainer:hover {
-  box-shadow: 0 0 3pt 2pt cornflowerblue;
-}
-
-.plusIcon {
-  color: white;
-}
-
 .musicPlayer {
   z-index: 60;
 }
@@ -90,17 +25,6 @@ body {
 label {
   display: block;
   font-size: 14px;
-}
-
-.invalidLogin {
-  position: absolute;
-  top: 100px;
-  font-size: 14px;
-  background-color: rgba(255, 0, 0, .5);
-  padding: 3px;
-  padding-left: 7px;
-  padding-right: 7px;
-  border-radius: 20px;
 }
 
 .click {
