@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { turnOnAutoPlay } from '../slices/autoPlaySlice';
+import styles from './search.module.css';
 
 const Search = ({ setSearchTerm }) => {
   const dispatch = useDispatch();
@@ -20,10 +21,10 @@ const Search = ({ setSearchTerm }) => {
   };
 
   return (
-    <div className="search">
-      <form className="searchContainer" onSubmit={handleSearchSubmit}>
-        <input placeholder="Search..." className="searchBar" onChange={handleSearchChange} />
-        <FontAwesomeIcon className="searchIcon" icon={faSearch} />
+    <div className={styles.search}>
+      <form className={styles.searchContainer} onSubmit={handleSearchSubmit}>
+        <input placeholder="Search..." className={styles.searchBar} onChange={handleSearchChange} />
+        <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
       </form>
     </div>
   );

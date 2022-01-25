@@ -1,0 +1,16 @@
+.spotifyLoginButton {
+  display: flex;
+  width: 100px;
+  height: 18px;
+  background: #1DB954;
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  margin: 10px;
+}

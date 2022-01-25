@@ -1,7 +1,12 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "plugins": ["react-hooks"],
   "rules": {

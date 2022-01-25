@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import info from '../info';
+import config from '../../config';
 import Image from './image';
-import { updateSearchedImages } from '../slices/searchedImagesSlice';
+import { updateSearchedImages } from '../../slices/searchedImagesSlice';
+import styles from './images.module.css';
 
 const style = {
   position: 'relative',
@@ -35,7 +36,7 @@ const ImageContainer = ({ search }) => {
   }, [savedImagesSelected]);
 
   let imageIdx = 0;
-  const { pexelsAuth } = info;
+  const { pexelsAuth } = config;
 
   const changeImg = (idx) => {
     document.body.style.backgroundImage = `url(${backgrounds[idx]})`;
@@ -48,10 +49,12 @@ const ImageContainer = ({ search }) => {
 
     changeImg(imageIdx);
 
-    if (currentImage < backgrounds.length - 1) {
-      currentImage += 1;
+    if (imageIdx < backgrounds.length - 1) {
+      imageIdx += 1;
+      setCurrentImageIdx((prev) => prev + 1);
     } else {
-      currentImage = 0;
+      imageIdx = 0;
+      setCurrentImageIdx(0);
     }
   };
 
@@ -63,6 +66,12 @@ const ImageContainer = ({ search }) => {
       cycleImg.bind(imageIdx, currentImageIdx, setCurrentImageIdx), 3000,
     );
     setCurrentInterval(slideShowTimer);
+  };
+
+  const pauseImages = () => {
+    if (currentInterval) {
+      clearInterval(currentInterval);
+    }
   };
 
   const toggle = () => {
@@ -79,7 +88,7 @@ const ImageContainer = ({ search }) => {
   useEffect(() => {
     if (search === '' || search === undefined) return;
 
-    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70`, pexelsAuth)
+    axios.get(`https://api.pexels.com/v1/search?query=${search}+wallpaper&per_page=70&orientation=landscape`, pexelsAuth)
       .then((data) => {
         const { photos } = data.data;
         const formattedPhotos = photos.map((photo) => photo.src.landscape);
@@ -105,8 +114,8 @@ const ImageContainer = ({ search }) => {
 
   return (
     <>
-      <div onClick={toggle} className="toggle" />
-      <div className="imageContainer">
+      <div onClick={toggle} className={styles.toggle} />
+      <div className={`${styles.imageContainer} scroll`}>
         {backgrounds.map((background, idx) =>
           <Image key={idx} idx={idx} background={background} setImageClickedIdx={setImageClickedIdx} style={style} />)}
       </div>

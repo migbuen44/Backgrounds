@@ -5,10 +5,6 @@ import {
   Route,
 } from 'react-router-dom';
 import Home from './home';
-import SpotifyLogin from './spotifyLogin';
-import Login from './login';
-import SignUp from './signup';
-
 
 const App = () => (
   <Router>

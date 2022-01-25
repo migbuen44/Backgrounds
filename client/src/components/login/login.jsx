@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../slices/userLoginSlice';
-import { setUserInfo } from '../slices/userInfoSlice';
-import { updateSavedImages } from '../slices/savedImagesSlice';
-import info from '../info';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../slices/userLoginSlice';
+import { setUserInfo } from '../../slices/userInfoSlice';
+import { updateSavedImages } from '../../slices/savedImagesSlice';
+import config from '../../config';
 import SignUp from './signup';
-import { closeModal } from '../slices/loginModalSlice';
+import { closeModal } from '../../slices/loginModalSlice';
+import styles from './login.module.css';
 
-const { url } = info;
+const { url } = config;
 const { localStorage } = window;
 
 const Login = () => {
-  const userLoggedIn = useSelector((state) => state.userLogin.value);
-  const userInfo = useSelector((state) => state.userInfo.value);
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,20 +69,20 @@ const Login = () => {
 
   return (
     <>
-      <div className="userInfo">
-        <h2 className="header">Login</h2>
-        {invalidLogin ? <div className="invalidLogin">Invalid username or password</div> : <></>}
+      <div className={styles.userInfo}>
+        <h2 className={styles.header}>Login</h2>
+        {invalidLogin ? <div className={styles.invalidLogin}>Invalid username or password</div> : <></>}
         <form onSubmit={handleLoginClick}>
           <div>
             <label>Email </label>
-            <input type="email" className="email" onChange={handleEmailChange} />
+            <input type="email" className={styles.email} onChange={handleEmailChange} />
           </div>
           <div>
             <label>Password </label>
-            <input type="password" className="password" onChange={handlePasswordChange} />
+            <input type="password" className={styles.password} onChange={handlePasswordChange} />
           </div>
-          <button type="submit" className="submitLogin" onClick={handleLoginClick}>Login</button>
-          <button type="button" className="toSignUp" onClick={handleSignUpClick}>SignUp</button>
+          <button type="submit" className={styles.submitLogin} onClick={handleLoginClick}>Login</button>
+          <button type="button" className={styles.toSignUp} onClick={handleSignUpClick}>SignUp</button>
         </form>
       </div>
     </>

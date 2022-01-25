@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserSlash, faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { openModal } from '../slices/loginModalSlice';
+import { faBookmark, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { selectSavedImages, selectSearchedImages } from '../slices/savedImagesSelectedSlice';
 import MusicPlayer from './musicPlayer';
-import LoginModal from './loginModal';
-import SongContainer from './songContainer';
-import ImageContainer from './imageContainer';
+import LoginModal from './login/loginModal';
+import SongContainer from './songs/songContainer';
+import ImageContainer from './images/imageContainer';
 import Search from './search';
 import useAuth from '../useAuth';
 import SpotifyLoginButton from './spotifyLogin';
+import LoginIcon from './icons_and_holders/loginIcon';
+import LogoutIcon from './icons_and_holders/logoutIcon';
+import styles from './home.module.css';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 const Home = () => {
-  // let [value, setValue] = useState('chill');
   const accessToken = useAuth(code);
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((state) => state.userLogin.value);
@@ -32,10 +33,6 @@ const Home = () => {
   useEffect(() => {
     setSavedImagesSelected(userSelectedSavedImages);
   }, [userSelectedSavedImages]);
-
-  const handleLoginClick = () => {
-    dispatch(openModal());
-  };
 
   const handleSavedClicked = () => {
     if (!userLoggedIn) {
@@ -63,45 +60,31 @@ const Home = () => {
       <ImageContainer search={searchTerm} />
       {
         accessToken ? <SongContainer search={searchTerm} accessToken={accessToken} />
-          : (
-            <SpotifyLoginButton />
-          )
+          : <SpotifyLoginButton />
       }
       <Search setSearchTerm={setSearchTerm} />
-      {loggedIn
-        ? (
-          <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
-            <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUserSlash} />
+      {loggedIn ? <LogoutIcon /> : <LoginIcon />}
+      {savedImagesSelected ? (
+          <div className={`${styles.saveSelectContainer} iconCircle click`} onClick={handleSearchedClicked}>
+            <FontAwesomeIcon className={styles.savedButton} style={{ color: 'black' }} icon={faSearch} />
           </div>
-        )
-        : (
-        <div className="iconCircle loginContainer click" onClick={handleLoginClick}>
-          <FontAwesomeIcon className="loginButton" style={{ color: 'black' }} icon={faUser} />
-        </div>
-        )}
-      {savedImagesSelected
-        ? (
-          <div className="iconCircle saveSelectContainer click" onClick={handleSearchedClicked}>
-            <FontAwesomeIcon className="savedButton" style={{ color: 'black' }} icon={faSearch} />
-          </div>
-        )
-        : (
+        ) : (
           <div
-            className="iconCircle saveSelectContainer click"
+            className={`${styles.saveSelectContainer} iconCircle click`}
             onMouseEnter={handleSavedMouseEnter}
             onMouseLeave={handleSavedMouseLeave}
             onClick={handleSavedClicked}>
-            <FontAwesomeIcon className="searchedButton" style={{ color: 'black' }} icon={faBookmark} />
-            {displayLoginPrompt ? <span className="loginPrompt">Login to view saved backgrounds</span>
+            <FontAwesomeIcon className={styles.searchedButton} style={{ color: 'black' }} icon={faBookmark} />
+            {displayLoginPrompt ? <span className={styles.loginPrompt}>Login to view saved backgrounds</span>
               : <></>}
           </div>
         )}
       <LoginModal />
       {
-        accessToken ? <MusicPlayer className="musicPlayer" accessToken={accessToken} />
+        accessToken ? <MusicPlayer accessToken={accessToken} />
           : (
-            <div className="musicPlayerHolder">
-              <div className="playerHolderMessage">Sign in to Spotify to play songs</div>
+            <div className={styles.musicPlayerHolder}>
+              <div className={styles.playerHolderMessage}>Sign in to Spotify to play songs</div>
             </div>
           )
       }

@@ -101,3 +101,7 @@ typings/
 
 # TernJS port file
 .tern-port
+
+dir_to_ignore/tests
+
+.test.js
