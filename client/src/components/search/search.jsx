@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { turnOnAutoPlay } from '../slices/autoPlaySlice';
+import { turnOnAutoPlay } from '../../slices/autoPlaySlice';
 import styles from './search.module.css';
 
 const Search = ({ setSearchTerm }) => {
