@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image matches snapshot 1`] = `
+<div
+  className="lib-images-module-singleImageContainer-zbyy"
+>
+  <img
+    alt=""
+    className="lib-images-module-singleImage-3NRS click"
+    onClick={[Function]}
+  />
+</div>
+`;
