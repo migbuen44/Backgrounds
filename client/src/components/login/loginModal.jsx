@@ -16,8 +16,8 @@ const OVERLAY_STYLES = {
 };
 
 const MODAL_STYLES = {
-  width: '80vh',
-  height: '50vh',
+  width: '50vh',
+  height: '70vh',
   position: 'fixed',
   top: '50%',
   left: '50%',
