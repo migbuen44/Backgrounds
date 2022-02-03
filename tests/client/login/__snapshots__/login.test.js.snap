@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login matches snapshot 1`] = `
+<div
+  className="lib-login-module-userInfo-1ziX"
+>
+  <h2
+    className="lib-login-module-header-3GFZ"
+  >
+    Login
+  </h2>
+  <form
+    onSubmit={[Function]}
+  >
+    <div>
+      <label>
+        Email 
+      </label>
+      <input
+        className="lib-login-module-email-2xXE"
+        onChange={[Function]}
+        type="email"
+      />
+    </div>
+    <div>
+      <label>
+        Password 
+      </label>
+      <input
+        className="lib-login-module-password-1jMN"
+        onChange={[Function]}
+        type="password"
+      />
+    </div>
+    <button
+      className="lib-login-module-submitLogin-kUim"
+      onClick={[Function]}
+      type="submit"
+    >
+      Login
+    </button>
+    <button
+      className="lib-login-module-toSignUp-3v1K"
+      onClick={[Function]}
+      type="button"
+    >
+      SignUp
+    </button>
+  </form>
+</div>
+`;

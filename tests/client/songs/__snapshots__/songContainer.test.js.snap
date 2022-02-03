@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SongContainer matches snapshot 1`] = `
+<div
+  className="lib-songs-module-songContainer-2dxb scroll"
+/>
+`;
