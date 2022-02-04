@@ -7,6 +7,8 @@ import { setUserInfo } from '../../slices/userInfoSlice';
 import config from '../../config';
 import { closeModal } from '../../slices/loginModalSlice';
 import styles from './login.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faEnvelope, faUser, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const { url } = config;
 const { localStorage } = window;
@@ -49,27 +51,30 @@ const SignUp = ({ setDisplaySignUp }) => {
   };
 
   return (
-    <>
-      <div className={styles.userInfo}>
+    <div className={styles.signUpContainer}>
+      <div className={styles.formSectionContainer}>
         <h2 className={styles.header}>SignUp</h2>
-        <form onSubmit={handleSignUpClick}>
-          <div>
-            <label>Email </label>
-            <input type="email" className={styles.email} onChange={handleEmailChange} />
+        <form onSubmit={handleSignUpClick} className={styles.userEntryForm}>
+          <div className={styles.inputContainer}>
+            <FontAwesomeIcon className={styles.emailIcon} icon={faEnvelope} />
+            <input type="email" placeHolder="Email" className={styles.email} onChange={handleEmailChange} />
           </div>
-          <div>
-            <label>Name </label>
-            <input type="text" className={styles.name} onChange={handleNameChange} />
+          <div className={styles.inputContainer}>
+            <FontAwesomeIcon className={styles.nameIcon} icon={faUser}/>
+            <input type="text" placeHolder="Name" className={styles.name} onChange={handleNameChange} />
           </div>
-          <div>
-            <label>Password </label>
-            <input type="password" className={styles.password} onChange={handlePasswordChange} />
+          <div className={styles.inputContainer}>
+            <FontAwesomeIcon className={styles.passwordIcon} icon={faLock}/>
+            <input type="password" placeHolder="Password" className={styles.password} onChange={handlePasswordChange} />
           </div>
-          <button type="submit" className={styles.signUp} onClick={handleSignUpClick}>SignUp</button>
-          <button type="button" className={styles.toLogin} onClick={handleLoginClick}>Login</button>
+          <button type="submit" className={`${styles.submitSignUp} click`} onClick={handleSignUpClick}>SignUp</button>
         </form>
       </div>
-    </>
+      <div className={`${styles.toLogin} click`}>
+        <FontAwesomeIcon className={styles.backArrowIcon} icon={faArrowLeft}/>
+        <span className={styles.backToLoginMsg} onClick={handleLoginClick}>Back to Login</span>
+      </div>
+    </div>
   );
 };
 

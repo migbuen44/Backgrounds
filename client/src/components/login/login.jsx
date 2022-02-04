@@ -8,6 +8,9 @@ import config from '../../config';
 import SignUp from './signup';
 import { closeModal } from '../../slices/loginModalSlice';
 import styles from './login.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+// import logo from '../../img/logo_and_name.png';
 
 const { url } = config;
 const { localStorage } = window;
@@ -68,24 +71,33 @@ const Login = () => {
   }
 
   return (
-    <>
-      <div className={styles.userInfo}>
+    <div className={styles.loginContainer}>
+      <div className={styles.formSectionContainer}>
+        {/* <img className={styles.logo} src={logo} alt="logo" /> */}
         <h2 className={styles.header}>Login</h2>
         {invalidLogin ? <div className={styles.invalidLogin}>Invalid username or password</div> : <></>}
-        <form onSubmit={handleLoginClick}>
-          <div>
-            <label>Email </label>
-            <input type="email" className={styles.email} onChange={handleEmailChange} />
+        <form onSubmit={handleLoginClick} className={styles.userEntryForm}>
+          <div className={styles.inputContainer}>
+            <FontAwesomeIcon className={styles.emailIcon} icon={faEnvelope} />
+            <input type="email" className={styles.email} placeHolder="Email" onChange={handleEmailChange} />
           </div>
-          <div>
-            <label>Password </label>
-            <input type="password" className={styles.password} onChange={handlePasswordChange} />
+          <div className={styles.inputContainer}>
+            <FontAwesomeIcon className={styles.passwordIcon} icon={faLock}/>
+            <input type="password" className={styles.password} placeHolder="Password" onChange={handlePasswordChange} />
           </div>
-          <button type="submit" className={styles.submitLogin} onClick={handleLoginClick}>Login</button>
-          <button type="button" className={styles.toSignUp} onClick={handleSignUpClick}>SignUp</button>
+          <div className={styles.postMsgContainer}>
+            <span className={styles.postMsg}>
+              Don&#39;t have an account?&nbsp;
+            </span>
+            <span className={`${styles.createAccountBtn} click`} onClick={handleSignUpClick}>
+              Create One
+            </span>
+          </div>
+          <button type="submit" className={`${styles.submitLogin} click`} onClick={handleLoginClick}>Login</button>
+          {/* <button type="button" className={styles.toSignUp} onClick={handleSignUpClick}>SignUp</button> */}
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
