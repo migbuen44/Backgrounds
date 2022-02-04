@@ -79,11 +79,11 @@ const Login = () => {
         <form onSubmit={handleLoginClick} className={styles.userEntryForm}>
           <div className={styles.inputContainer}>
             <FontAwesomeIcon className={styles.emailIcon} icon={faEnvelope} />
-            <input type="email" className={styles.email} placeHolder="Email" onChange={handleEmailChange} />
+            <input type="email" className={styles.email} placeholder="Email" onChange={handleEmailChange} />
           </div>
           <div className={styles.inputContainer}>
             <FontAwesomeIcon className={styles.passwordIcon} icon={faLock}/>
-            <input type="password" className={styles.password} placeHolder="Password" onChange={handlePasswordChange} />
+            <input type="password" className={styles.password} placeholder="Password" onChange={handlePasswordChange} />
           </div>
           <div className={styles.postMsgContainer}>
             <span className={styles.postMsg}>

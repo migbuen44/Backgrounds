@@ -57,15 +57,15 @@ const SignUp = ({ setDisplaySignUp }) => {
         <form onSubmit={handleSignUpClick} className={styles.userEntryForm}>
           <div className={styles.inputContainer}>
             <FontAwesomeIcon className={styles.emailIcon} icon={faEnvelope} />
-            <input type="email" placeHolder="Email" className={styles.email} onChange={handleEmailChange} />
+            <input type="email" placeholder="Email" className={styles.email} onChange={handleEmailChange} />
           </div>
           <div className={styles.inputContainer}>
             <FontAwesomeIcon className={styles.nameIcon} icon={faUser}/>
-            <input type="text" placeHolder="Name" className={styles.name} onChange={handleNameChange} />
+            <input type="text" placeholder="Name" className={styles.name} onChange={handleNameChange} />
           </div>
           <div className={styles.inputContainer}>
             <FontAwesomeIcon className={styles.passwordIcon} icon={faLock}/>
-            <input type="password" placeHolder="Password" className={styles.password} onChange={handlePasswordChange} />
+            <input type="password" placeholder="Password" className={styles.password} onChange={handlePasswordChange} />
           </div>
           <button type="submit" className={`${styles.submitSignUp} click`} onClick={handleSignUpClick}>SignUp</button>
         </form>
