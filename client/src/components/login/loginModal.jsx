@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Login from './login';
 import { closeModal } from '../../slices/loginModalSlice';
 import styles from './login.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../img/logo_and_name.png';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -16,13 +19,13 @@ const OVERLAY_STYLES = {
 };
 
 const MODAL_STYLES = {
-  width: '80vh',
-  height: '50vh',
+  width: '50vh',
+  height: '70vh',
   position: 'fixed',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  backgroundColor: '#FFF',
+  backgroundColor: '#fffafa',
   padding: '20px',
   zIndex: 1000,
 };
@@ -47,7 +50,10 @@ const LoginModal = () => {
   return ReactDom.createPortal(
     <div style={OVERLAY_STYLES}>
       <div className={styles.modal} style={MODAL_STYLES}>
-        <span className={`${styles.closeModal} click`} style={{ float: 'right' }} onClick={handleCloseClick}>X</span>
+        <span className={`${styles.closeModal} click`} style={{ float: 'right' }} onClick={handleCloseClick}>
+          <FontAwesomeIcon icon={faTimes} />
+        </span>
+        <img className={styles.logo} src={logo} alt="logo" />
         <Login />
       </div>
     </div>,

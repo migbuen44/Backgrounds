@@ -1,13 +1,28 @@
-.userInfo {
+/* .loginContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+} */
+
+.formSectionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.5rem;
+  /* align-items: center; */
 }
 
 .header {
+  /* position: absolute; */
+  /* top: 40px; */
+  text-align: center;
+}
+
+.logo {
   position: absolute;
-  top: 40px;
+  top: 2vh;
+  width: 22vh;
+  height: 22vh;
 }
 
 .invalidLogin {
@@ -20,22 +35,69 @@
   padding-right: 7px;
   border-radius: 20px;
 }
+
+.userEntryForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .email, .name, .password {
+  /* margin: 10px;
+  height: 20px;
+  width: 190px;
+  padding: 10px;
+  border: solid #dcdcdc 1px; */
+  border: none;
+  /* justify-self: center; */
+}
+
+.email:focus, .name:focus, .password:focus {
+   outline: none;
+}
+
+.emailIcon, .passwordIcon, .nameIcon {
+  margin-right: 5px;
+}
+
+.inputContainer {
   margin: 10px;
+  height: 20px;
+  width: 190px;
+  padding: 10px;
+  background: white;
+  border: solid #dcdcdc 1px;
+  display: flex;
+  align-items: center;
 }
 
-.signUp, .submitLogin {
+/* .signUp, .submitLogin {
   float: right;
-}
+} */
 
 
-.toSignUp, .toLogin {
+.toLogin {
   position: absolute;
   bottom: 5px;
-  right: 10px;
+  left: 10px;
+  margin: 0.625rem;
 }
 
+.postMsgContainer {
+  text-align: center;
+}
 
+.postMsg {
+  font-size: 0.875rem;
+  color: #696969;
+}
+
+.createAccountBtn {
+  font-size: 0.875rem;
+}
+
+.createAccountBtn:hover {
+  text-decoration: underline;
+}
 
 .modal {
   display: flex;
@@ -51,7 +113,7 @@
   margin: 10px;
 }
 
-.signUp, .toLogin, .submitLogin, .toSignUp {
+/* .signUp, .toLogin, .submitLogin, .toSignUp {
   background-color: rgba(51, 51, 51, .3);
   border-radius: 8px;
   border-width: 0;
@@ -72,4 +134,17 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+} */
+
+.submitLogin, .submitSignUp {
+  border: none;
+  background: black;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin: 0.625rem;
+}
+
+.backToLoginMsg {
+  margin: 0.625rem;
 }
